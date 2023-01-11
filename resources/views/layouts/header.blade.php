@@ -59,7 +59,6 @@
 
                         </ul>
                     </li>
-                    <li><a href="courses.html">Courses</a></li>
                     <li class="dropdown"><a href="services.html">Services</a>
                         <ul class="submenu">
                             <li><a href="schedule.html">Our Schedule</a></li>
@@ -76,6 +75,12 @@
                     </li>
 
                     <li><a href="contact.html">Contact</a></li>
+                    <li class="dropdown"><a href="#">Account</a>
+                        <ul class="submenu">
+                            <li><a href="{{route('register')}}">Register</a></li>
+                            <li><a href="schedule.html">Login</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="clearfix"></div>
             </div>
