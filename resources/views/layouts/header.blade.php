@@ -77,8 +77,12 @@
                     <li><a href="contact.html">Contact</a></li>
                     <li class="dropdown"><a href="#">Account</a>
                         <ul class="submenu">
+                            @if (Auth::user())
+                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                            @else
                             <li><a href="{{route('register')}}">Register</a></li>
-                            <li><a href="schedule.html">Login</a></li>
+                            <li><a href="{{route('login')}}">Login</a></li>
+                            @endif
                         </ul>
                     </li>
                 </ul>
