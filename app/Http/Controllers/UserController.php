@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
 use Hash;
 use Session;
@@ -30,17 +31,17 @@ class UserController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        
+
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'password_save' => $request->password,
-
-            'role' => '0'
+            'password_save' => Crypt::encrypt($request->password),
+            'role' => '0',
+            'status' => '1'
         ];
-        
+   
         $user = User::insert($data);
         return redirect('login')->with('success', 'Registration Completed, now you can login');
       
@@ -48,7 +49,7 @@ class UserController extends Controller
     }
     public function login()
     {
-        return view('auth.login');
+            return view('auth.login');
     }
     public function validate_login(Request $request)
     {
@@ -56,16 +57,22 @@ class UserController extends Controller
             'email' =>  'required',
             'password'  =>  'required'
         ]);
-
         $credentials = $request->only('email', 'password');
-
-        if(Auth::attempt($credentials))
-        {
-            
-            return redirect('dashboard');
-        }
-
+        
+        $users = User::where('email',$request->email)->first();
+        
+            if(Auth::attempt($credentials))
+            {
+                if(!empty($users) && $users->role == '1'){
+                    return redirect('admin/dashboard');
+                }
+                
+                if(!empty($users) && $users->role == '0'){
+                    return redirect('dashboard');
+                }
+            }
         return redirect('login')->with('success', 'Login details are not valid');
+
     }
 
     public function dashboard()
@@ -87,7 +94,9 @@ class UserController extends Controller
     }
     public function edit(){
         if(Auth::check()){
-            return view('auth.userProfile_update');
+            $item = User::find(Auth::id());
+            $item['password_save'] = Crypt::decrypt($item->password_save);
+            return view('auth.userProfile_update',compact('item'));
         }
         return redirect('login')->with('success', 'Login details are not valid');
     }
@@ -99,13 +108,22 @@ class UserController extends Controller
         ]);
         $item = User::find(Auth::id());
         $data = $request->all();
+        if(Crypt::decrypt($item->password_save) !== $data['password']){
+            $data['password'] = Hash::make( $data['password']);
+            $data['password_save'] = Crypt::encrypt($data['password']);
+        }else{
+            $data['password_save'] = $item->password_save;
+            $data['password'] = $item->password;
+        }
+        
+        
         if (!$request->hasFile('image')) {
             $data['image'] = $item->image;
         } else {
-        $image = $request->file('image');
-        $image_name = time() . '.' . $image->getClientOriginalExtension();
-        $request->image->move(public_path('upload/images'), $image_name);
-        $data['image'] = $image_name;
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $request->image->move(public_path('upload/images'), $image_name);
+            $data['image'] = $image_name;
         }
         
        
@@ -116,5 +134,6 @@ class UserController extends Controller
     
         return redirect('dashboard');
     }
+    
 }
 

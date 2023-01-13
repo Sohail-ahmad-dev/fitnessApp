@@ -61,14 +61,8 @@
                                   <li class="list-group-item"><i class="fa fa-user"></i> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</li>
                                   <li class="list-group-item"><i class="fa fa-envelope"></i> {{ Auth::user()->email }}</li>
                                   <li class="list-group-item"><i class="fa fa-map-marker"></i> {{ Auth::user()->address }}</li>
-                                  <li class="list-group-item"><i class="fa fa-phone"></i> {{ Auth::user()->phone_number }}</li>
-                                  <li class="list-group-item"><i class="fa fa-check"></i>
-                                    @if (Auth::user()->status == 1)
-                                            <span class="text-success">Active</span>
-                                        @else
-                                            <span class="text-danger">Inactive</span>
-                                    @endif
-                                    </li>
+                                  <li class="list-group-item"><i class="fa fa-phone"></i> {{ Auth::user()->phone_number }}
+                                  </li>
                                </ul>
                             </div>
                          </div>

@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                <input type="text" name="first_name" id="first_name" class="form-control input-sm" value="{{ Auth::user()->first_name }}" placeholder="First Name">
+                                <input type="text" name="first_name" id="first_name" class="form-control input-sm" value="{{ $item->first_name }}" placeholder="First Name">
                                 <span class="text-danger">
                                     @if ($errors->has('first_name'))
                                         {{$errors->first('first_name')}}
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="last_name" id="last_name" class="form-control input-sm" value="{{ Auth::user()->last_name }}" placeholder="Last Name">
+                                    <input type="text" name="last_name" id="last_name" class="form-control input-sm" value="{{ $item->last_name }}" placeholder="Last Name">
                                     <span class="text-danger">
                                         @if ($errors->has('last_name'))
                                             {{$errors->first('last_name')}}
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                    <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" value="{{$item->password_save}}">
                                     <span class="text-danger">
                                         @if ($errors->has('password'))
                                             {{$errors->first('password')}}
@@ -54,22 +54,13 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="phone_number" id="phone_number" class="form-control input-sm" placeholder="Phone Number" value="{{ Auth::user()->phone_number }}">
+                                    <input type="text" name="phone_number" id="phone_number" class="form-control input-sm" placeholder="Phone Number" value="{{ $item->phone_number }}">
                                     
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="address" id="address" class="form-control input-sm" placeholder="Address" value="{{ Auth::user()->address }}">
-                                    
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                   <select name="status" id="status" class="form-control input-sm">
-                                    <option value="1">Active</option>
-                                    <option value="0">In Active</option>
-                                   </select>
+                                    <input type="text" name="address" id="address" class="form-control input-sm" placeholder="Address" value="{{ $item->address }}">
                                     
                                 </div>
                             </div>
