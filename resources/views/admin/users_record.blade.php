@@ -3,6 +3,12 @@
 		width:30px;
 		border-radius: 100%;
 	}
+	.user_status.text-succes{
+		color:#23ad44;
+	}
+	.user_status.text-dnger{
+		color:#f62d51;
+	}
 </style>
 @extends('admin/layouts/default')
 
@@ -46,6 +52,7 @@
 													<th>Address</th>
 													<th>Phone Number</th>
 													<th>Status</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -71,10 +78,13 @@
 															{{!empty($user->phone_number) ? $user->phone_number : "N/A"}}
 														</td>
 														<td>
-															<select class="form-control {{ $user->status == '1' ? 'text-success' : 'text-danger' }}" id="status-{{ $user->id }}" onchange="updateStatus({{ $user->id }})">
+															<select class="user_status form-control {{ $user->status == '1' ? 'text-succes' : 'text-dnger' }}" id="userStatus-{{$user->id}}" data-userId="{{$user->id}}" onchange="stateUpdateUser({{$user->id}})">
 																<option value="1" {{ $user->status == '1' ? 'selected' : '' }}>Active</option>
 																<option value="0" {{ $user->status == '0' ? 'selected' : '' }}>In Active</option>
 															</select>
+														</td>
+														<td>
+															<button type="button" class="btn btn-danger" onclick="deleteUser({{ $user->id }})">Delete</button>
 														</td>
 													</tr>
 													@endforeach
@@ -91,27 +101,3 @@
 				</div>			
 			
 @endsection
-<script>
-	setTimeout(() => {
-		function updateStatus(id) {
-			alert(123)
-			var status = document.getElementById('status-'+id).value;
-			$.ajax({
-				url: "{{ route('admin.users.updateStatus') }}",
-				type: 'POST',
-				data: {
-					_token: "{{ csrf_token() }}",
-					id: id,
-					status: status
-				},
-				success: function(response) {
-					if (response.status == 'success') {
-						alert('User status updated successfully!');
-					} else {
-						alert('An error occurred. Please try again.');
-					}
-				}
-			});
-		}
-	}, 1500);
-</script>

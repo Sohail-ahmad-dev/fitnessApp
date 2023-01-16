@@ -66,7 +66,7 @@
                     </li>
                     <li class="dropdown"><a href="blog.html">Blog</a>
                         <ul class="submenu">
-                            <li><a href="blog-without-sidebar.html">Blog Full Width</a></li>
+                            <li><a href="{{route('blog.post')}}">Blog Full Width</a></li>
                             <li><a href="blog.html">Blog Left Sidebar</a></li>
                             <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
                             <li><a href="blog-left-right-sidebar.html">Blog Left Right Sidebar</a></li>

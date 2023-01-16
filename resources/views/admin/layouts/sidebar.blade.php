@@ -34,6 +34,9 @@
                 <li> 
                     <a href="{{route('usersRecord')}}"><i class="feather-user"></i> <span>Users</span></a>
                 </li>
+                <li> 
+                    <a href="{{url('fitness-posts')}}"><i class="feather-user"></i> <span>Manage Posts</span></a>
+                </li>
                 {{-- <li> 
                     <a href="tasks.html"><i class="feather-check-square"></i> <span>Tasks</span></a>
                 </li>

@@ -22,4 +22,13 @@ class DashboardController extends Controller
         $user->save();
         return response()->json(['status' => 'success']);
     }
+    public function userDelete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
 }

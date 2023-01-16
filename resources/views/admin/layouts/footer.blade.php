@@ -187,6 +187,11 @@
 <!-- Slimscroll JS -->
 <script src="/assets/admin/js/jquery.slimscroll.min.js"></script>
 
+<!-- sweet Alert Js -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js"></script>
+
+<script src="/assets/admin/js/admin_ajax.js"></script>
+
 
 <!-- Chart JS -->
 <script src="/assets/admin/js/morris.js"></script>

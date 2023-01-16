@@ -67,7 +67,7 @@ class UserController extends Controller
                     return redirect('admin/dashboard');
                 }
                 
-                if(!empty($users) && $users->role == '0'){
+                if(!empty($users) && $users->role == '0' && $users->status == '1'){
                     return redirect('dashboard');
                 }
             }

@@ -8,6 +8,7 @@
         <meta name="author" content="Dreamguys - Bootstrap Admin Template">
         <meta name="robots" content="noindex, nofollow">
         <title>Dashboard - CRMS admin template</title>
+        <meta name="base_url" content="{{url('')}}">
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="/assets/admin/img/favicon.png">
@@ -33,9 +34,15 @@
 		<!-- Theme CSS -->
         <link rel="stylesheet" href="/assets/admin/css/theme-settings.css">
 
+        <!-- Sweet Alert Css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.css">
+
 		<!-- Main CSS -->
         <link rel="stylesheet" href="/assets/admin/css/style.css" class="themecls">
-
+        <script>
+            window.base_url = "{{url('')}}" || '';
+            window.csrf = "{{csrf_token()}}" || '';
+        </script>
     </head>
     <body >
 		<!-- Main Wrapper -->
