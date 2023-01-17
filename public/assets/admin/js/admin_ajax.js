@@ -109,3 +109,45 @@ function deletePost(id) {
         }
     });
 }
+
+function deleteWorkout(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to Delete this User?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url:  base_url+"/guided-workouts/"+id,
+                type: 'DELETE',
+                data: {
+                    _token: csrf,
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        Swal.fire(
+                            'Deleted!',
+                            'User has been deleted.',
+                            'success'
+                        ).then((resultData) => {
+                            if (resultData.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                        $('#user-'+id).remove();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred. Please try again.',
+                            'error'
+                        )
+                    }
+                }
+            });
+        }
+    });
+}

@@ -10,8 +10,11 @@
         background: linear-gradient(to right, #da8cff, #9a55ff);
     }
 	.profile_img{
-		width:30px;
+		width:100px;
 	}
+    .postDesc {
+        width: 300px;
+    }
 </style>
 @extends('admin/layouts/default')
 
@@ -34,7 +37,7 @@
             </div>
             <div class="col p-0 text-end">
                 <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Posts</li>
                 </ul>
             </div>
@@ -88,7 +91,7 @@
                                                 <span class="text-danger">In Active</span>
                                             @endif
                                             </td>
-                                            <td>
+                                            <td class="postDesc">
                                                 {{!empty($item->post_content)? $item->post_content : "N/A"}}
                                              </td>
                                            <td>

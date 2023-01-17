@@ -138,7 +138,7 @@ class FitnessPostsController extends Controller
 
     public function blogPost()
     {
-        $blogs = FitnessPosts::all();
+        $blogs = FitnessPosts::where('post_status', 1)->get();
         return view('blog_post', compact('blogs'));
     }
 }

@@ -10,12 +10,12 @@
 			<h3 class="page-title">
 			<span class="page-title-icon bg-gradient-primary text-white me-2">
 				<i class="la la-table"></i>
-			</span> <span>Deals Dashboard</span></h3>
+			</span> <span>Fitness App Dashboard</span></h3>
 		</div>
 		<div class="col text-end">
 			<ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
-				<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-				<li class="breadcrumb-item active">Deals Dashboard</li>
+				<li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+				<li class="breadcrumb-item active">Dashboard</li>
 			</ul>
 		</div>
 	</div>

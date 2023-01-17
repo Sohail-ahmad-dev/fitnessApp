@@ -15,7 +15,7 @@
         </div>
         <div class="col p-0 text-end">
             <ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Add Post</li>
             </ul>
         </div>

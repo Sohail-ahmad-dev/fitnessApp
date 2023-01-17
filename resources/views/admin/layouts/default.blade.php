@@ -43,6 +43,11 @@
             window.base_url = "{{url('')}}" || '';
             window.csrf = "{{csrf_token()}}" || '';
         </script>
+        <style>
+            .sidebar-contact {
+                display: none;
+            }
+        </style>
     </head>
     <body >
 		<!-- Main Wrapper -->

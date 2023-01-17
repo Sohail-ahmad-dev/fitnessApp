@@ -1,6 +1,6 @@
 <style>
 	.profile_img{
-		width:30px;
+		width:50px;
 		border-radius: 100%;
 	}
 	.user_status.text-succes{
@@ -8,6 +8,13 @@
 	}
 	.user_status.text-dnger{
 		color:#f62d51;
+	}
+	.user_status {
+		-webkit-appearance: menulist !important;
+		-moz-appearance: menulist !important;
+		-ms-appearance: menulist !important;
+		-o-appearance: menulist !important;
+		appearance: menulist !important;
 	}
 </style>
 @extends('admin/layouts/default')
@@ -23,12 +30,12 @@
                 			<h3 class="page-title">
 			                <span class="page-title-icon bg-gradient-primary text-white me-2">
 			                  <i class="la la-table"></i>
-			                </span> Basic Tables</h3>
+			                </span>Users Record</h3>
                 		</div>
                 		<div class="col p-0 text-end">
                 			<ul class="breadcrumb bg-white float-end m-0 ps-0 pe-0">
-								<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-								<li class="breadcrumb-item active">Basic Tables</li>
+								<li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+								<li class="breadcrumb-item active">Users Record</li>
 							</ul>
                 		</div>
                 	</div>
