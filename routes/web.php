@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FitnessPostsController;
 use App\Http\Controllers\GuidedWorkoutsController;
+use App\Http\Controllers\ExerciseController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +29,20 @@ Route::middleware(['admin'])->group(function () {
     });
     Route::resource('fitness-posts', FitnessPostsController::class);
     Route::resource('guided-workouts', GuidedWorkoutsController::class);
+    Route::controller(ExerciseController::class)->name('exercise.')->group(function () {
+        Route::get('exercise', 'index')->name('index');
+        Route::get('exercise/create', 'create')->name('create');
+        Route::post('exercise/insert', 'insert')->name('insert');
+        Route::delete('exerciseDelete/{id}', 'delete')->name('delete');
+        Route::get('exercise/edit/{id}', 'edit')->name('edit');
+        Route::post('exercise/update/{id}', 'update')->name('update');
+        Route::get('exercise/seconds', 'ExerciseSecondsindex')->name('seconds');
+        Route::post('exercise/seconds/insert', 'ExSecondsInsert')->name('secondsInsert');
+        Route::delete('secondsDelete/{id}', 'ExerciseSecondsdelete')->name('secondsDelete');
+        Route::post('exercise/secondsEdit/{id}', 'secondsEdit')->name('secondsEdit');
+        Route::put('exercise/secondsUpdate/{id}', 'secondsUpdate')->name('secondsUpdate');
+        
+    });
 });
 
 Route::get('blog/post', [FitnessPostsController::class, 'blogPost'])->name('blog.post');
