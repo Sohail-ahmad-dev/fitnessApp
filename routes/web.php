@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FitnessPostsController;
 use App\Http\Controllers\GuidedWorkoutsController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\WorkoutPlansController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,6 +43,12 @@ Route::middleware(['admin'])->group(function () {
         Route::post('exercise/secondsEdit/{id}', 'secondsEdit')->name('secondsEdit');
         Route::put('exercise/secondsUpdate/{id}', 'secondsUpdate')->name('secondsUpdate');
         
+    });
+
+    Route::controller(WorkoutPlansController::class)->name('workoutPlans.')->group(function () {
+        Route::get('workoutPlans', 'index')->name('index');
+        Route::get('workoutPlans/create', 'create')->name('create');
+        Route::post('workoutPlans/insert', 'insert')->name('insert');
     });
 });
 
