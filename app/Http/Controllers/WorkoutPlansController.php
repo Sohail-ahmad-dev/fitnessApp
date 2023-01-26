@@ -33,11 +33,14 @@ class WorkoutPlansController extends Controller
             'upload_url' => 'required',
             'description' => 'required',
         ]);
-        if ($validator->fails()) {
-            return redirect('workoutPlans/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     dd($validator);
+        //     return redirect('workoutPlans/create')
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
+
+        dd($request->all());
         
         $data = [
             'title' => $request->title,
@@ -50,6 +53,7 @@ class WorkoutPlansController extends Controller
             'upload_type' => $request->upload_type,
             'description' => $request->description,
             'days' => $request->days,
+            'exercise_list' => $request->exercise_list,
             
         ];
         $image = $request->file('upload_url');

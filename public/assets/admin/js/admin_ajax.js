@@ -279,7 +279,7 @@ var countDays = 2;
 function daysCount(multiDrop){
     var dayval = countDays ++;
     var daysData = '';
-    var daysData = `<div class="row"><label class="col-form-label col-md-2">Day ${dayval}</label><div class="col-md-10 inputBox mb-2"><input type="text" name="days-${dayval}" class="form-control" value="${dayval}"><label class="col-form-label col-md-6">Select Excercise List</label><div class="col-md-12"><select class="workoutPlans_dropdown-${dayval} form-control" name="">`;
+    var daysData = `<div class="row"><label class="col-form-label col-md-2">Day ${dayval}</label><div class="col-md-10 inputBox mb-2"><input type="text" name="days-${dayval}" class="form-control" value="${dayval}"><label class="col-form-label col-md-6">Select Excercise List</label><div class="col-md-12"><select class="workoutPlans_dropdown-${dayval} form-control" name="exercise_list-${dayval}">`;
     for (let i = 0; i < multiDrop.length; i++) {
         daysData += `<option value=${multiDrop[i]['id']}>${multiDrop[i]['title']}</option>`
     }
@@ -389,6 +389,32 @@ jQuery.fn.extend({
 //addWorkoutPlans
 function addWorkoutPlans(){
     var workoutdata = $("#addWorkoutPlans").serializeArray();
-    console.log(workoutdata);
+    var days = []; 
+    var exercise_list = []; 
+
+    var orignalData = workoutdata.filter(elm =>{
+        if(elm.name.includes('exercise_list'))
+            exercise_list.push(elm)
+        if(elm.name.includes('days'))
+            days.push(elm)
+        if(elm.name.includes('exercise_list') || elm.name.includes('days')){
+        }else{
+            return elm
+        }
+    })
+    orignalData.push({name:'days',value:JSON.stringify(days)});
+    orignalData.push({name:'exercise_list',value:JSON.stringify(exercise_list)});
+    console.log(base_url+"/workoutPlans/insert");
+    $.ajax({
+        url: base_url+"/workoutPlans/insert",
+        type: 'POST',
+        data: orignalData,
+        success: function(result) {
+            console.log(result);
+            // location.reload(true);
+        }
+    });
+    
+    console.log(orignalData);
     return false;
 }

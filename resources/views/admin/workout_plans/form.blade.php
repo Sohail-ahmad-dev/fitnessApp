@@ -256,7 +256,7 @@
                                 <input type="text" name="days-1" class="form-control" value="1">
                                 <label class="col-form-label col-md-6">Select Excercise List</label>
                                 <div class="col-md-12">
-                                    <select class="workoutPlans_dropdown" class="form-control" name="exercise_list">
+                                    <select class="workoutPlans_dropdown" class="form-control" name="exercise_list-1">
                                         @if(!empty($exerciseData))
                                         @foreach($exerciseData as $exData)
                                         <option value="{{!empty($exData->id) ? $exData->id: N/A}}">{{$exData->title}}</option>
