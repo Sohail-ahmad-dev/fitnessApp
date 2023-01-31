@@ -9,6 +9,7 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\WorkoutPlansController;
 use App\Http\Controllers\EquipmentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChallengesController;
 
 
 /*
@@ -58,6 +59,10 @@ Route::middleware(['admin'])->group(function () {
     // Equipment routes here Start
     Route::resource('equipment', EquipmentController::class);
     // Equipment routes here End
+
+    // challenges routes here Start
+    Route::resource('challenges', ChallengesController::class);
+    // challenges routes here End
 
 });
 
