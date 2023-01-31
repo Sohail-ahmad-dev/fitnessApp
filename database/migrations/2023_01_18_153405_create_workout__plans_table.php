@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('upload_type');
             $table->string('upload_url');
             $table->longText('description');
-            $table->string('days',2);
+            $table->text('days');
+            $table->text('exercise_list');
             $table->timestamps();
         });
     }

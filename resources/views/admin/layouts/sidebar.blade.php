@@ -44,6 +44,9 @@
                     <a href="{{url('exercise')}}"><i class="feather-list"></i> <span>Exercise List</span></a>
                 </li>
                 <li> 
+                    <a href="{{url('equipment')}}"><i class="feather-list"></i> <span>Equipment List</span></a>
+                </li>
+                <li> 
                     <a href="{{url('workoutPlans')}}"><i class="feather-list"></i> <span>Workout Plans</span></a>
                 </li>
                 {{-- <li> 

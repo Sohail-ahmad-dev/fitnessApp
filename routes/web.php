@@ -7,6 +7,7 @@ use App\Http\Controllers\FitnessPostsController;
 use App\Http\Controllers\GuidedWorkoutsController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\WorkoutPlansController;
+use App\Http\Controllers\EquipmentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,7 +50,15 @@ Route::middleware(['admin'])->group(function () {
         Route::get('workoutPlans', 'index')->name('index');
         Route::get('workoutPlans/create', 'create')->name('create');
         Route::post('workoutPlans/insert', 'insert')->name('insert');
+        Route::get('workoutPlans/edit/{id}', 'edit')->name('plansEdit');
+        Route::post('workoutPlans/{id}', 'update')->name('plansUpdate');
+        Route::delete('workoutPlans/{id}', 'destroy')->name('plansDestroy');
     });
+
+    // Equipment routes here Start
+    Route::resource('equipment', EquipmentController::class);
+    // Equipment routes here End
+
 });
 
 Route::get('blog/post', [FitnessPostsController::class, 'blogPost'])->name('blog.post');

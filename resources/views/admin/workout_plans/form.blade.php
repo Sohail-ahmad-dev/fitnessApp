@@ -122,7 +122,7 @@
                 </div>
                 <div class="card-body">
                     {{-- action="{{route('workoutPlans.insert')}}" --}}
-                    <form  method="POST" enctype="multipart/form-data" onsubmit="return addWorkoutPlans(this)" id="addWorkoutPlans">
+                    <form  method="POST" enctype="multipart/form-data" onsubmit="return addWorkoutPlans('add')" id="addWorkoutPlans">
                         @csrf
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">Title</label>
@@ -189,7 +189,13 @@
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">Equipment</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" name="equipment">
+                                <select class="equipments_dropdown" class="form-control" name="equipment">
+                                    @if(!empty($equipment))
+                                        @foreach($equipment as $exData)
+                                        <option value="{{!empty($exData->equipment) ? $exData->equipment: 'N/A'}}">{{$exData->equipment}}</option>
+                                        @endforeach()
+                                    @endif
+                                </select>
                                 <span class="text-danger">
                                     @if ($errors->has('equipment'))
                                         {{$errors->first('equipment')}}
@@ -251,18 +257,20 @@
                             </div>
                         </div>
                         <div class="form-group row workoutPlan_box">
-                            <label class="col-form-label col-md-2">Day 1</label>
-                            <div class="col-md-10 inputBox mb-2">
-                                <input type="text" name="days-1" class="form-control" value="1">
-                                <label class="col-form-label col-md-6">Select Excercise List</label>
-                                <div class="col-md-12">
-                                    <select class="workoutPlans_dropdown" class="form-control" name="exercise_list-1">
-                                        @if(!empty($exerciseData))
-                                        @foreach($exerciseData as $exData)
-                                        <option value="{{!empty($exData->id) ? $exData->id: N/A}}">{{$exData->title}}</option>
-                                        @endforeach()
-                                        @endif
-                                    </select>
+                            <div class="row">
+                                <label class="col-form-label col-md-2">Day 1</label>
+                                <div class="col-md-10 inputBox mb-2">
+                                    <input type="text" name="days-1" class="form-control" value="1">
+                                    <label class="col-form-label col-md-6">Select Excercise List</label>
+                                    <div class="col-md-12">
+                                        <select class="workoutPlans_dropdown" class="form-control" name="exercise_list-1">
+                                            @if(!empty($exerciseData))
+                                            @foreach($exerciseData as $exData)
+                                            <option value="{{!empty($exData->id) ? $exData->id: N/A}}">{{$exData->title}}</option>
+                                            @endforeach()
+                                            @endif
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
