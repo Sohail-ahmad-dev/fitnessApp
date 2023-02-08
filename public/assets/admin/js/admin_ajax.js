@@ -1,3 +1,5 @@
+
+var base_url = $('meta[name="base_url"]').attr('content') || '';
 function stateUpdateUser(id){
     var status = document.getElementById('userStatus-'+id).value;
     $.ajax({
@@ -523,7 +525,8 @@ jQuery.fn.extend({
 //addWorkoutPlans
 function addWorkoutPlans(action,id){
     var formData = new FormData();
-    var workoutdata = $("#editWorkoutPlans").serializeArray();
+    action === 'add' ? base_url+"/workoutPlans/insert": base_url+"/workoutPlans/"+id
+    var workoutdata = action === 'add' ? $("#addWorkoutPlans").serializeArray(): $("#editWorkoutPlans").serializeArray();
 
     var fileInput = document.querySelector('input[name="upload_url"]');
     formData.append('upload_url', fileInput.files[0]);
@@ -573,7 +576,12 @@ function addWorkoutPlans(action,id){
         success: function(result) {
             const data = parseInt(result);
             if(data){
-                window.location.href = '/workoutPlans'
+                var redirect = action === 'add' ? $("#addWorkoutPlans input[name='roleUser']").val(): $("#editWorkoutPlans input[name='roleUser']").val()
+                if(redirect === '1'){
+                    window.location.href = '/workoutPlans'
+                }else{
+                    window.location.href = '/dashboard/workout'
+                }
             }
         }
     });

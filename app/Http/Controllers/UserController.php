@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Challenges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
+use App\Models\Workout_Plans;
 use Hash;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Equipment;
+use App\Models\Exercise;
 
 class UserController extends Controller
 {
@@ -77,9 +81,13 @@ class UserController extends Controller
 
     public function dashboard()
     {
+        return view('home.index');
+    }
+    public function inbox()
+    {
         if(Auth::check())
         {
-            return view('auth.user_profile');
+            return view('inbox.index');
         }
 
         return redirect('login')->with('success', 'you are not allowed to access');
@@ -134,6 +142,64 @@ class UserController extends Controller
     
         return redirect('dashboard');
     }
+    public function workout()
+    {
+        $workouts = [];
+        $createdData = [];
+
+        $categories = Workout_Plans::select('category')->whereHas('user', function ($query) {
+            $query->where('role', 1);
+        })->get()->toArray();
+
+        $createdData = Workout_Plans::where('user_id',Auth::id())->get()->toArray();
+
+        $categories = array_unique(array_map(function ($i) { return $i['category']; }, $categories));
+        
+        if(count($categories) > 0){
+
+            foreach ($categories as $val) {
+
+                $data = Workout_Plans::where('category',$val)->whereHas('user', function ($query) {
+                    $query->where('role', 1);
+                })->get()->toArray();
+                array_push($workouts,[
+                    'category' => $val,
+                    'data' => $data,
+                ]);
+                
+            }
+
+        }
+
+        // dd($data);
+        return view('workout.index',compact('workouts','createdData'));
+    }
+
+    public function workoutDetail($id,$name=null)
+    {
+        $data = Workout_Plans::find($id)->toArray();
+        // dd($data);
+        return view('workout.workoutDetail', compact('data'));
+    }
+
+    public function workoutCreate()
+    {
+        $exerciseData = Exercise::all();
+        $equipment = Equipment::all();
+        return view('workout.form', compact('exerciseData','equipment'));
+    }
+
+
+    public function challenges()
+    {
+        if(Auth::check())
+        {
+            $challenges = Challenges::all();
+            return view('challenges.index',compact('challenges'));
+        }
+
+        return redirect('login')->with('success', 'you are not allowed to access');
+    }
+
     
 }
-

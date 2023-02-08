@@ -38,6 +38,7 @@ class WorkoutPlansController extends Controller
             'exercise_list' => $request->exercise_list,
             
         ];
+        // dd($data);
         $image = $request->file('upload_url');
         $image_name = time() . '.' . $image->getClientOriginalName();
         $request->upload_url->move(public_path('upload/images'), $image_name);
