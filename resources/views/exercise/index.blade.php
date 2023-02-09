@@ -36,6 +36,11 @@
             flex-direction: column;
             justify-content: center;
         }
+
+        .row {
+            justify-content: center;
+            display: flex;
+        }
     </style>
 
     <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
@@ -61,7 +66,11 @@
                         </div>
 
                         <div class="col-md-10 details">
-                            <h5>{{ $exercise['title'] }}</h5>
+                            <h3>
+                                <strong>
+                                    {{ $exercise['title'] }}
+                                </strong>
+                            </h3>
                             <p>{{ $exercise['secondary_muscle'] }}</p>
                         </div>
                     </div>
