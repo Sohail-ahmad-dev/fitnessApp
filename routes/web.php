@@ -95,6 +95,11 @@ Route::middleware(['user'])->group(function () {
         Route::get('dashboard/challenges/{id}/{name}', 'challengesDetail')->name('challenges.detail');
         Route::post('dashboard/challenges/join', 'challengeJoin')->name('challenges.join');
         Route::post('dashboard/challenges/leave', 'challengeLeave')->name('challenges.leave');
+        // Exercise
+        Route::get('dashboard/exercise', 'exercise')->name('user.exercise');
+        // Route::get('dashboard/exercise/{id}/{name}', 'exerciseDetail')->name('exercise.detail');
+        // Route::post('dashboard/exercise/join', 'challengeJoin')->name('exercise.join');
+        // Route::post('dashboard/exercise/leave', 'challengeLeave')->name('exercise.leave');
 
     });
 

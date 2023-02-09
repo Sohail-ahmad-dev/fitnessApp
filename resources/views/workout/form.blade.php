@@ -104,9 +104,13 @@
             margin-bottom: 50px;
         }
 
-        h4,
-        label {
-            color: #fff;
+        .px-0 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .pt-20 {
+            padding-top: 20px;
         }
 
         .mx-auto {
@@ -116,6 +120,19 @@
         .pb-10 {
             padding-bottom: 10px;
         }
+
+        .p-25 {
+            padding: 25px;
+        }
+
+        .px-15 {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .shadow {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
     </style>
 
     <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
@@ -123,7 +140,7 @@
 
 
             <div class="row" style="display: flex; justify-content: center;">
-                <div class="col-md-8 mx-auto col-12">
+                <div class="col-md-8 mx-auto col-12 bg-white p-25 shadow">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title pb-10">Add Workout Plan</h4>
@@ -264,18 +281,18 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 text-end">
+                                    <div class="col-md-12 text-right">
                                         <button onclick="daysCount({{ $exerciseData }})" type="button"
                                             class="btn btn-primary dayscountBtn"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="form-group row workoutPlan_box">
-                                    <div class="row">
+                                    <div class="row px-15">
                                         <label class="col-form-label col-md-2">Day 1</label>
                                         <div class="col-md-10 inputBox mb-2">
                                             <input type="text" name="days-1" class="form-control" value="1">
-                                            <label class="col-form-label col-md-6">Select Excercise List</label>
-                                            <div class="col-md-12">
+                                            <label class="col-form-label col-md-6 px-0">Select Excercise List</label>
+                                            <div class="col-md-12 px-0">
                                                 <select class="workoutPlans_dropdown" class="form-control"
                                                     name="exercise_list-1">
                                                     @if (!empty($exerciseData))
@@ -291,7 +308,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 row">
-                                    <div class="col-md-10">
+                                    <div class="col-md-12">
                                         <div class="input-group">
                                             <button class="btn btn-primary" type="submit">Add</button>
                                         </div>

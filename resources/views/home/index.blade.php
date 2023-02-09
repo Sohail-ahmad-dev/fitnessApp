@@ -58,7 +58,7 @@
                 </div>
                 <figure class="image">
                     <img src="{{ asset('assets/images/resource/features-image-2.jpg') }}" alt="" title="">
-                    <a class="overlay" href="#"></a>
+                    <a class="overlay" href="{{ route('user.exercise') }}"></a>
                     <div class="arrow from-left"><span></span></div>
                 </figure>
                 <div class="clearfix"></div>

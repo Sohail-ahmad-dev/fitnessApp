@@ -410,7 +410,7 @@ function daysCount(multiDrop){
     countDays = $(".workoutPlan_box").children().length + 1;
     var dayval = countDays ++;
     var daysData = '';
-    var daysData = `<div class="row"><label class="col-form-label col-md-2">Day ${dayval}</label><div class="col-md-10 inputBox mb-2"><input type="text" name="days-${dayval}" class="form-control" value="${dayval}"><label class="col-form-label col-md-6">Select Excercise List</label><div class="col-md-12"><select class="workoutPlans_dropdown-${dayval} form-control" name="exercise_list-${dayval}">`;
+    var daysData = `<div class="row px-15 pt-20"><label class="col-form-label col-md-2">Day ${dayval}</label><div class="col-md-10 inputBox mb-2"><input type="text" name="days-${dayval}" class="form-control" value="${dayval}"><label class="col-form-label col-md-6 px-0">Select Excercise List</label><div class="col-md-12 px-0"><select class="workoutPlans_dropdown-${dayval} form-control" name="exercise_list-${dayval}">`;
     for (let i = 0; i < multiDrop.length; i++) {
         daysData += `<option value=${multiDrop[i]['id']}>${multiDrop[i]['title']}</option>`
     }

@@ -298,5 +298,15 @@ class UserController extends Controller
     }
     // challenges End
 
+    // Exercise List Start
+
+    public function exercise()
+    {
+        $exercises = Exercise::all()->toArray();
+        // dd($exercise);
+        return view('exercise.index',compact('exercises'));
+    }
+    
+    // Exercise List End
     
 }
