@@ -92,6 +92,9 @@ Route::middleware(['user'])->group(function () {
         Route::get('dashboard/workout/{id}/{name}', 'workoutDetail')->name('user.workoutDetail');
         // Challenges
         Route::get('dashboard/challenges', 'challenges')->name('user.challenges');
+        Route::get('dashboard/challenges/{id}/{name}', 'challengesDetail')->name('challenges.detail');
+        Route::post('dashboard/challenges/join', 'challengeJoin')->name('challenges.join');
+        Route::post('dashboard/challenges/leave', 'challengeLeave')->name('challenges.leave');
 
     });
 
