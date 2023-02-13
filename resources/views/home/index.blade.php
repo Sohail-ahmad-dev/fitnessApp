@@ -66,11 +66,11 @@
             <article class="post wow fadeInLeft" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
                 <figure class="image">
                     <img src="{{ asset('assets/images/resource/features-image-1.jpg') }}" alt="" title="">
-                    <a class="overlay" href="#"></a>
+                    <a class="overlay" href="{{ route('user.calendar') }}"></a>
                     <div class="arrow from-right"><span></span></div>
                 </figure>
                 <div class="text">
-                    <h3>Workout</h3>
+                    <h3>Activity Calendar</h3>
                     <p>As a member you can also access our pool and tennis courts for free and have priority for booking any
                         of the pre-book activities.</p>
                 </div>
@@ -79,7 +79,7 @@
             <article class="post wow fadeInRight" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
                 <figure class="image">
                     <img src="{{ asset('assets/images/resource/features-image-2.jpg') }}" alt="" title="">
-                    <a class="overlay" href="#"></a>
+                    <a class="overlay" href="{{ route('user.calendar') }}"></a>
                     <div class="arrow from-right"><span></span></div>
                 </figure>
                 <div class="text">

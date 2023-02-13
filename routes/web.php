@@ -97,9 +97,19 @@ Route::middleware(['user'])->group(function () {
         Route::post('dashboard/challenges/leave', 'challengeLeave')->name('challenges.leave');
         // Exercise
         Route::get('dashboard/exercise', 'exercise')->name('user.exercise');
+        Route::post('dashboard/exercise/today', 'exerciseToday')->name('exercise.today');
+        Route::get('dashboard/today/activity', 'todayActivity')->name('today.activity');
         // Route::get('dashboard/exercise/{id}/{name}', 'exerciseDetail')->name('exercise.detail');
         // Route::post('dashboard/exercise/join', 'challengeJoin')->name('exercise.join');
         // Route::post('dashboard/exercise/leave', 'challengeLeave')->name('exercise.leave');
+
+
+        // Activity Calendar
+        Route::get('dashboard/calendar', 'calendar')->name('user.calendar');
+        Route::post('dashboard/calendar', 'calendarActivity')->name('calendar.activity');
+        Route::get('dashboard/calendar/{id}/{name}', 'calendarDetail')->name('calendar.detail');
+        Route::post('dashboard/calendar/join', 'challengeJoin')->name('calendar.join');
+        Route::post('dashboard/calendar/leave', 'challengeLeave')->name('calendar.leave');
 
     });
 

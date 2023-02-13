@@ -591,7 +591,7 @@ function addWorkoutPlans(action,id){
 }
 
 function editDaysExercise(data,exerciseData){
-    console.log(data,exerciseData);
+    // console.log(data,exerciseData);
 
     var html = '';
     
@@ -651,4 +651,56 @@ function equipmentDrop (equipment) {
     }
     // equipments_dropdown
     $('.equipments_dropdown1').CreateMultiCheckBox({ defaultText : 'Select Below' })
+}
+
+function addCalendarBtn(){
+    var elmLength = $(".dashbord_container input[name='calander']").length;
+    var lopLeng = 0;
+
+    var exerArr_Id = [];
+    
+    $(".dashbord_container input[name='calander']").each(function(i){
+        if(!$(".calendarBtn").children('.btn').length){
+            $(".dashbord_container .calendarBtn").append(`<button type="submit" class="btn btn-primary">Add to today</button>`)
+        }
+        if(!$(this).is(':checked') && i === 0){
+            console.log($(".calendarBtn").children('.btn').length);
+            if($(".calendarBtn").children('.btn').length){
+                $(".calendarBtn").html('')
+            }
+        }
+
+        if(!$(this).is(':checked')){
+            lopLeng++
+        }else{
+            exerArr_Id.push($(this).attr("id"))
+        }
+        
+    });
+
+    if(elmLength === lopLeng){
+        $(".calendarBtn").html('')
+    }else{
+        $('input[name="exercise_id"]').val(exerArr_Id)
+    }
+
+    
+}
+
+function addToCalendar() {
+    var data = $("#addToCalendar").serializeArray();
+
+    $.ajax({
+        url: base_url+'/dashboard/exercise/today',
+        type: 'POST',
+        data: data,
+        success: function(result) {
+            if(result === '1'){
+                window.location.href = base_url+'/dashboard/today/activity'
+            }
+        }
+    });
+    
+    
+    return false;
 }

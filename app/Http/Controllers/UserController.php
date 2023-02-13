@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Equipment;
 use App\Models\Exercise;
 use App\Models\JoinChallenge;
+use App\Models\Activity_calendar;
 
 class UserController extends Controller
 {
@@ -303,10 +304,96 @@ class UserController extends Controller
     public function exercise()
     {
         $exercises = Exercise::all()->toArray();
-        // dd($exercise);
-        return view('exercise.index',compact('exercises'));
+        // dd($exercises);
+        return view('exercise.index', compact('exercises'));
+    }
+
+    public function exerciseToday(Request $request)
+    {
+        $exercise_id = $request->exercise_id;
+        $ids = explode(',',$exercise_id);
+        $ids = json_encode($ids);
+        $resp = '0';
+
+        $existOrNot = Activity_calendar::whereDate('calendar_date','=',date('Y-m-d'))->first();
+
+        if(!empty($existOrNot)){
+
+            $existOrNot->activity_id = $ids;
+            $resp = $existOrNot->save();
+
+        }else{
+
+            $resp = Activity_calendar::insert([
+                'calendar_date' => date('Y-m-d'),
+                'activity_id' => $ids
+            ]);
+
+        }
+
+        echo $resp;
+        // dd($resp);
+    }
+
+    public function todayActivity(Request $request)
+    {
+        $exercises = [];
+        $date = date('Y-m-d');
+
+        $activityCalendar = Activity_calendar::whereDate('calendar_date',
+        $date)->pluck('activity_id')->toArray();
+
+        $ids = array_reduce($activityCalendar, function ($carry, $item) {
+        return array_merge($carry, json_decode($item));
+        }, []);
+
+        $exercises = Exercise::whereIn('id', $ids)->get()->toArray();
+
+        
+        return view('exercise.todaysExercise',compact('exercises'));
     }
     
     // Exercise List End
+
+    // Activity Calendar Start
+
+    public function calendar()
+    {
+
+        $activityCalendar = Activity_calendar::whereDate('calendar_date',
+        date('Y-m-d'))->pluck('activity_id')->toArray();
+
+        $ids = array_reduce($activityCalendar, function ($carry, $item) {
+        return array_merge($carry, json_decode($item));
+        }, []);
+
+        $exercises = Exercise::whereIn('id', $ids)->get()->toArray();
+
+        return view('calendar.index',compact('exercises'));
+    }
+    public function calendarActivity(Request $request)
+    {
+        $exercises = [];
+        $date = date('Y-m-d');
+
+
+        $date = $request->date;
+        // dd($date);
+
+        $activityCalendar = Activity_calendar::whereDate('calendar_date',
+        $date)->pluck('activity_id')->toArray();
+
+        $ids = array_reduce($activityCalendar, function ($carry, $item) {
+        return array_merge($carry, json_decode($item));
+        }, []);
+
+        $exercises = Exercise::whereIn('id', $ids)->get()->toArray();
+
+        echo json_encode($exercises);
+        exit;
+
+
+    }
+    // Activity Calendar End
     
 }
