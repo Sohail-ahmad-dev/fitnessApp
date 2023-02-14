@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('activity_calendars', function (Blueprint $table) {
             $table->id();
             $table->date('calendar_date');
+            $table->date('end_date')->nullable();
             $table->json('workout_id')->nullable();
             $table->json('activity_id')->nullable();
             $table->timestamps();

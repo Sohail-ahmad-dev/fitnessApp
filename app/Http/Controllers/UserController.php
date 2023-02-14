@@ -230,6 +230,39 @@ class UserController extends Controller
         $equipment = Equipment::all();
         return view('workout.form', compact('exerciseData','equipment'));
     }
+    public function workoutCalendar($id)
+    {
+        $data = Workout_Plans::find($id)->toArray();
+        // dd($data);
+        return view('workout.calendar', compact('data'));
+    }
+    public function workoutInsert(Request $req){
+
+        $start_date = $req->start_date;
+        $end_date = $req->end_date;
+
+        $existOrNot =
+        Activity_calendar::where('workout_id','=',$req->id)->first();
+        // dd($existOrNot);
+        if(!empty($existOrNot)){
+
+            $existOrNot->workout_id = $req->id;
+            $existOrNot->calendar_date = $req->start_date;
+            $existOrNot->end_date = $req->end_date;
+            $resp = $existOrNot->save();
+
+        }else{
+
+            $resp = Activity_calendar::insert([
+                'calendar_date' => $req->start_date,
+                'end_date' => $req->end_date,
+                'workout_id' => $req->id
+            ]);
+
+        }
+        
+        return redirect()->route('user.calendar');
+    }
 
     // Workout End
 
@@ -314,8 +347,9 @@ class UserController extends Controller
         $ids = explode(',',$exercise_id);
         $ids = json_encode($ids);
         $resp = '0';
+        $date = !empty(Session::get('calendarDate')) ? Session::get('calendarDate') : date('Y-m-d');
 
-        $existOrNot = Activity_calendar::whereDate('calendar_date','=',date('Y-m-d'))->first();
+        $existOrNot = Activity_calendar::whereDate('calendar_date','=',$date)->first();
 
         if(!empty($existOrNot)){
 
@@ -325,9 +359,11 @@ class UserController extends Controller
         }else{
 
             $resp = Activity_calendar::insert([
-                'calendar_date' => date('Y-m-d'),
+                'calendar_date' => $date,
                 'activity_id' => $ids
             ]);
+
+            Session::forget('calendarDate');
 
         }
 
@@ -359,40 +395,87 @@ class UserController extends Controller
 
     public function calendar()
     {
+        $data = [];
+        $activityCalendar = Activity_calendar::whereDate('calendar_date','=',
+        date('Y-m-d'))->where('activity_id','!=', null)->get()->toArray();
 
-        $activityCalendar = Activity_calendar::whereDate('calendar_date',
-        date('Y-m-d'))->pluck('activity_id')->toArray();
+        $workoutCalendar = Activity_calendar::whereDate('calendar_date', '<=',date('Y-m-d'))->whereDate('end_date','>=', date('Y-m-d'))->where('workout_id','!=', null)->get()->toArray();
+
+        if(!empty($workoutCalendar)){
+            $workoutPlan = Workout_Plans::where('id',$workoutCalendar[0]['workout_id'])->get()->toArray();
+            $data['workoutPlan'] = !empty($workoutPlan[0]) ? $workoutPlan[0] : [];
+            $data['workoutPlanId'] = !empty($workoutPlan[0]) ? $workoutCalendar[0]['id'] : '';
+        }
+        
+        
+        if(!empty($activityCalendar)){
+            $data['calendar'] = $activityCalendar[0]['id'];
+        }
 
         $ids = array_reduce($activityCalendar, function ($carry, $item) {
-        return array_merge($carry, json_decode($item));
+            return array_merge($carry, json_decode($item['activity_id']));
         }, []);
 
-        $exercises = Exercise::whereIn('id', $ids)->get()->toArray();
+        $data['exercises'] = Exercise::whereIn('id', $ids)->get()->toArray();
+        // dd($data);
 
-        return view('calendar.index',compact('exercises'));
+        return view('calendar.index',compact('data'));
     }
     public function calendarActivity(Request $request)
     {
-        $exercises = [];
-        $date = date('Y-m-d');
+
+        $data = [];
+        $activityCalendar = Activity_calendar::whereDate('calendar_date','=',$request->date)->where('activity_id','!=', null)->get()->toArray();
+
+        $workoutCalendar = Activity_calendar::whereDate('calendar_date', '<=',$request->date)->whereDate('end_date','>=',$request->date)->where('workout_id','!=', null)->get()->toArray();
+
+        if(!empty($workoutCalendar)){
+            $workoutPlan = Workout_Plans::where('id',$workoutCalendar[0]['workout_id'])->get()->toArray();
+
+            $data['workoutPlan'] = !empty($workoutPlan[0]) ? $workoutPlan[0] : [];
+            $data['workoutPlanId'] = !empty($workoutPlan[0]) ? $workoutCalendar[0]['id'] : '';
+        }
 
 
-        $date = $request->date;
-        // dd($date);
-
-        $activityCalendar = Activity_calendar::whereDate('calendar_date',
-        $date)->pluck('activity_id')->toArray();
+        if(!empty($activityCalendar)){
+            $data['calendar'] = $activityCalendar[0]['id'];
+        }
 
         $ids = array_reduce($activityCalendar, function ($carry, $item) {
-        return array_merge($carry, json_decode($item));
+            return array_merge($carry, json_decode($item['activity_id']));
         }, []);
 
-        $exercises = Exercise::whereIn('id', $ids)->get()->toArray();
+        $data['exercises'] = Exercise::whereIn('id', $ids)->get()->toArray();
+        // dd($workoutCalendar);
 
-        echo json_encode($exercises);
+        // dd($data);
+
+        // dd($exercises);
+
+        echo json_encode($data);
         exit;
 
+    }
+    public function calendarDestroy(Request $req)
+    {
+        $id = $req->id;
+        $activityCalendar = Activity_calendar::findOrFail($id);
+        $activityCalendar->delete();
+    
+        return redirect()->route('user.calendar');
+    }
 
+    public function calendarDateAssign(Request $request)
+    {
+        Session::put('calendarDate',$request->calendarDate);
+    }
+    public function workoutDestroy(Request $request)
+    {
+        $id = $req->id;
+        $workout_Plans = Workout_Plans::findOrFail($id);
+        $workout_Plans->delete();
+
+        return redirect()->route('user.calendar');
     }
     // Activity Calendar End
     

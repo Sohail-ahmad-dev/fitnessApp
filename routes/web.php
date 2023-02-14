@@ -89,6 +89,9 @@ Route::middleware(['user'])->group(function () {
         // Workout
         Route::get('dashboard/workout', 'workout')->name('user.workout');
         Route::get('dashboard/workout/create', 'workoutCreate')->name('user.workout.create');
+        Route::post('dashboard/workout/create', 'workoutInsert')->name('user.workout.insert');
+        Route::post('dashboard/workout/destroy', 'workoutDestroy')->name('workout.destroy');
+        Route::get('dashboard/workout/calendar/{id}', 'workoutCalendar')->name('user.workoutCalendar');
         Route::get('dashboard/workout/{id}/{name}', 'workoutDetail')->name('user.workoutDetail');
         // Challenges
         Route::get('dashboard/challenges', 'challenges')->name('user.challenges');
@@ -107,6 +110,8 @@ Route::middleware(['user'])->group(function () {
         // Activity Calendar
         Route::get('dashboard/calendar', 'calendar')->name('user.calendar');
         Route::post('dashboard/calendar', 'calendarActivity')->name('calendar.activity');
+        Route::post('dashboard/calendar/delete', 'calendarDestroy')->name('calendar.destroy');
+        Route::post('dashboard/calendar/dateAssign', 'calendarDateAssign')->name('calendar.dateAssign');
         Route::get('dashboard/calendar/{id}/{name}', 'calendarDetail')->name('calendar.detail');
         Route::post('dashboard/calendar/join', 'challengeJoin')->name('calendar.join');
         Route::post('dashboard/calendar/leave', 'challengeLeave')->name('calendar.leave');

@@ -79,10 +79,30 @@
             flex-direction: column;
             justify-content: center;
         }
+
+        .addButton {
+            position: fixed;
+            right: 40px;
+            bottom: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: #0c1f34;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 9999;
+            border: 1px solid #fff;
+        }
+
+        .addButton i {
+            font-size: 20px;
+            color: #fff;
+        }
     </style>
 
     <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
-
 
         <div class="container dashbord_container">
             <div class="row">
@@ -91,7 +111,7 @@
                     <img src="{{ asset('/upload/images/' . $data['upload_url']) }}" alt="">
                 </div>
 
-                <div class="col-4 items">
+                <div class="col-md-4 items">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                     <h5 class="duration">
                         {{ $data['duration'] }}
@@ -101,7 +121,7 @@
                     </p>
                 </div>
 
-                <div class="col-4 items">
+                <div class="col-md-4 items">
                     <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     <h5 class="level">
                         {{ $data['level'] }}
@@ -111,7 +131,7 @@
                     </p>
                 </div>
 
-                <div class="col-4 items">
+                <div class="col-md-4 items">
                     <i class="fa fa-fire" aria-hidden="true"></i>
                     <h5 class="level">
                         {{ $data['kcal'] }}
@@ -121,32 +141,32 @@
                     </p>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-12">
                     <hr>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-12">
                     <h3>Goal</h3>
                     <button class="btn btn-default" type="button">
                         {{ $data['goal'] }}
                     </button>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-12">
                     <h3>Equipment</h3>
                     <button class="btn btn-default" type="button">
                         {{ $data['equipment'] }}
                     </button>
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-12">
                     <hr>
                 </div>
 
                 @if (!empty($daysData))
 
                     @foreach ($daysData as $daysD)
-                        <div class="col-12 workouts">
+                        <div class="col-md-12 workouts">
                             <h3>Day {{ $daysD['day'] }}</h3>
                             <p class="mb-0">
                                 {{ $data['duration'] }} | {{ $data['kcal'] }} Kcal
@@ -156,7 +176,7 @@
                                 @foreach ($daysD['workout_list'] as $workoutData)
                                     <div class="row">
 
-                                        <div class="col-3">
+                                        <div class="col-md-3">
 
                                             @if ($workoutData['upload_type'] == 'image')
                                                 <img src="{{ asset('upload/images/' . $workoutData['upload_url']) }}"
@@ -172,7 +192,7 @@
 
                                         </div>
 
-                                        <div class="col-9">
+                                        <div class="col-md-9">
                                             <h5>{{ $workoutData['title'] }}</h5>
                                             <p>{{ $data['equipment'] }}</p>
                                         </div>
@@ -189,6 +209,12 @@
 
 
             </div>
+        </div>
+
+        <div class="addButton" data-toggle="modal" data-target="#addToCalendar">
+            <a href="{{ route('user.workoutCalendar', $data['id']) }}">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+            </a>
         </div>
 
 
