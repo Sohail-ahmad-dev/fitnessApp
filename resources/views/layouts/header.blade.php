@@ -8,13 +8,14 @@
 ?>
 
 <header class="main-header">
-    <div class="auto-container clearfix">
+    <div class="auto-container clearfix row">
 
         <!-- Logo -->
-        <div class="logo"><a href="#"><img src="/assets/images/logo.png" alt="Logo" title="StayFit"></a></div>
+        <div class="logo col-md-2"><a href="#"><img src="/assets/images/logo.png" alt="Logo" title="StayFit"></a>
+        </div>
 
         <!-- Main Menu -->
-        <nav class="main-menu">
+        <nav class="main-menu col-md-10" style="margin: 0;">
             <div class="navbar-header">
                 <!-- Toggle Button -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,65 +27,55 @@
 
             <div class="navbar-collapse collapse clearfix">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="current dropdown"><a href="index.html">Home</a>
-                        <ul class="submenu">
-                            <li><a href="index.html">Home Style One</a></li>
-                            <li><a href="index-2.html">Home Style Two</a></li>
-                            <li><a href="index-3.html">Home Style Three</a></li>
-                            <li><a href="index-one-page-version.html"> One Page Version</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#">Pages</a>
-                        <ul class="submenu">
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="qa.html">Q & A</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li class="dropdown"><a href="gallery-page-2-col.html">Gallery</a>
-                                <ul class="submenu">
-                                    <li><a href="gallery-page-2-col.html">Gallery Two Col</a></li>
-                                    <li><a href="gallery-page-3-col.html">Gallery Three Col</a></li>
-                                    <li><a href="gallery-page-3-col-full-width.html">Gallery Three Col Full Width</a></li>
-                                    <li><a href="gallery-page-4-col.html">Gallery Four Col</a></li>
-                                    <li><a href="gallery-page-4-col-full-width.html">Gallery Four Col Full Width</a></li>
-                                    <li><a href="gallery-page-6-col.html">Gallery Six Col</a></li>
-                                    <li><a href="gallery-page-6-col-full-width.html">Gallery Six Col Full Width</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" dropdown"><a href="about-us.html">About us</a>
-                        <ul class="submenu">
-                            <li><a href="our-team.html">Our Team</a></li>
-                            <li><a href="pricing.html">Our Pricing</a></li>
 
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="services.html">Services</a>
-                        <ul class="submenu">
-                            <li><a href="schedule.html">Our Schedule</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="blog.html">Blog</a>
-                        <ul class="submenu">
-                            <li><a href="{{route('blog.post')}}">Blog Full Width</a></li>
-                            <li><a href="blog.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="blog-left-right-sidebar.html">Blog Left Right Sidebar</a></li>
-                            <li><a href="blog-detail.html">Single Post</a></li>
-                        </ul>
+                    <li class="{{ request()->routeIs('dashboard') ? 'current' : '' }}">
+                        <a href="{{ route('dashboard') }}">Home</a>
                     </li>
 
-                    <li><a href="contact.html">Contact</a></li>
-                    <li class="dropdown"><a href="#">Account</a>
-                        <ul class="submenu">
-                            @if (Auth::user())
-                            <li><a href="{{ route('logout') }}">Logout</a></li>
-                            @else
-                            <li><a href="{{route('register')}}">Register</a></li>
-                            <li><a href="{{route('login')}}">Login</a></li>
-                            @endif
-                        </ul>
+                    <li
+                        class="{{ request()->routeIs('user.workout') ||
+                        request()->routeIs('user.workoutCalendar') ||
+                        request()->routeIs('user.workoutDetail') ||
+                        request()->routeIs('user.workout.create')
+                            ? 'current'
+                            : '' }}">
+                        <a href="{{ route('user.workout') }}">Workout</a>
                     </li>
+
+                    <li
+                        class="{{ request()->routeIs('user.challenges') || request()->routeIs('challenges.detail') ? 'current' : '' }}">
+                        <a href="{{ route('user.challenges') }}">Challenges</a>
+                    </li>
+
+                    <li
+                        class="{{ request()->routeIs('user.exercise') || request()->routeIs('today.activity') ? 'current' : '' }}">
+                        <a href="{{ route('user.exercise') }}">Exercise List</a>
+                    </li>
+
+                    <li
+                        class="{{ request()->routeIs('user.calendar') || request()->routeIs('calendar.detail') ? 'current' : '' }}">
+                        <a href="{{ route('user.calendar') }}">Activity Calendar</a>
+                    </li>
+
+                    @if (!Auth::user())
+                        <li class="dropdown"><a href="#">Account</a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('register') }}">Register</a></li>
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if (Auth::user())
+                        <li class="dropdown">
+                            <a href="">
+                                Welcome {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -94,8 +85,8 @@
     </div>
 
     <div class="open-hours">
-        <div class="toggle-open-hours"><span class="fa fa-clock-o"></span> <span>Opening Hours</span> <br>Monday - Sunday 8:00 - 22:00</div>
+        <div class="toggle-open-hours"><span class="fa fa-clock-o"></span> <span>Opening Hours</span> <br>Monday -
+            Sunday 8:00 - 22:00</div>
     </div>
 
 </header>
-
