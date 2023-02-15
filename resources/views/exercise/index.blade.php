@@ -52,7 +52,7 @@
         }
     </style>
 
-    <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
+    <section class="features" style="background-image:url({{ asset('public/assets/images/background/image-3.jpg') }});">
         <div class="container dashbord_container">
 
             @if (!empty($exercises))
@@ -66,13 +66,13 @@
 
                                 <div class="exercise-content col-md-11">
                                     @if ($exercise['upload_type'] == 'image')
-                                        <img src="{{ asset('upload/images/' . $exercise['upload_url']) }}"
+                                        <img src="{{ asset('public/upload/images/' . $exercise['upload_url']) }}"
                                             class="img-responsive" alt="">
                                     @endif
 
                                     @if ($exercise['upload_type'] == 'video')
                                         <video controls>
-                                            <source src="{{ asset('upload/images/' . $exercise['upload_url']) }}">
+                                            <source src="{{ asset('public/upload/images/' . $exercise['upload_url']) }}">
                                         </video>
                                     @endif
 

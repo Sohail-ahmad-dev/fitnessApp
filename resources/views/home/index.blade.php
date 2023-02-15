@@ -4,12 +4,13 @@
 <!-- Main Slider -->
 @section('content')
     <!--app cards-->
-    <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
+    <section class="features" style="background-image:url({{ asset('public/assets/images/background/image-3.jpg') }});">
         <div class="auto-container clearfix">
 
             <article class="post wow fadeInLeft" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
                 <figure class="image">
-                    <img src="{{ asset('assets/images/resource/features-image-1.jpg') }}" alt="" title="">
+                    <img src="{{ asset('public/assets/images/resource/features-image-1.jpg') }}" alt=""
+                        title="">
                     <a class="overlay" href="#"></a>
                     <div class="arrow from-right"><span></span></div>
                 </figure>
@@ -23,7 +24,8 @@
 
             <article class="post wow fadeInRight" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
                 <figure class="image">
-                    <img src="{{ asset('assets/images/resource/features-image-2.jpg') }}" alt="" title="">
+                    <img src="{{ asset('public/assets/images/resource/features-image-2.jpg') }}" alt=""
+                        title="">
                     <a class="overlay" href="{{ route('user.workout') }}"></a>
                     <div class="arrow from-right"><span></span></div>
                 </figure>
@@ -43,7 +45,8 @@
                         of the pre-book activities.</p>
                 </div>
                 <figure class="image">
-                    <img src="{{ asset('assets/images/resource/features-image-1.jpg') }}" alt="" title="">
+                    <img src="{{ asset('public/assets/images/resource/features-image-1.jpg') }}" alt=""
+                        title="">
                     <a class="overlay" href="{{ route('user.challenges') }}"></a>
                     <div class="arrow from-left"><span></span></div>
                 </figure>
@@ -57,7 +60,8 @@
                         of the pre-book activities.</p>
                 </div>
                 <figure class="image">
-                    <img src="{{ asset('assets/images/resource/features-image-2.jpg') }}" alt="" title="">
+                    <img src="{{ asset('public/assets/images/resource/features-image-2.jpg') }}" alt=""
+                        title="">
                     <a class="overlay" href="{{ route('user.exercise') }}"></a>
                     <div class="arrow from-left"><span></span></div>
                 </figure>
@@ -65,7 +69,8 @@
             </article>
             <article class="post wow fadeInLeft" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
                 <figure class="image">
-                    <img src="{{ asset('assets/images/resource/features-image-1.jpg') }}" alt="" title="">
+                    <img src="{{ asset('public/assets/images/resource/features-image-1.jpg') }}" alt=""
+                        title="">
                     <a class="overlay" href="{{ route('user.calendar') }}"></a>
                     <div class="arrow from-right"><span></span></div>
                 </figure>
@@ -78,7 +83,8 @@
             </article>
             <article class="post wow fadeInRight" data-wow-delay="0.5s" data-wow-duration="1.5s" data-wow-offset="0">
                 <figure class="image">
-                    <img src="{{ asset('assets/images/resource/features-image-2.jpg') }}" alt="" title="">
+                    <img src="{{ asset('public/assets/images/resource/features-image-2.jpg') }}" alt=""
+                        title="">
                     <a class="overlay" href="{{ route('user.calendar') }}"></a>
                     <div class="arrow from-right"><span></span></div>
                 </figure>

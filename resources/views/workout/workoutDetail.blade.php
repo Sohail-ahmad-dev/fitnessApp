@@ -102,7 +102,7 @@
         }
     </style>
 
-    <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
+    <section class="features" style="background-image:url({{ asset('public/assets/images/background/image-3.jpg') }});">
 
         <div class="container dashbord_container">
             <div class="row">
@@ -179,14 +179,14 @@
                                         <div class="col-md-3">
 
                                             @if ($workoutData['upload_type'] == 'image')
-                                                <img src="{{ asset('upload/images/' . $workoutData['upload_url']) }}"
+                                                <img src="{{ asset('public/upload/images/' . $workoutData['upload_url']) }}"
                                                     alt="">
                                             @endif
 
                                             @if ($workoutData['upload_type'] == 'video')
                                                 <video width="120" height="120" controls>
                                                     <source
-                                                        src="{{ asset('upload/images/' . $workoutData['upload_url']) }}">
+                                                        src="{{ asset('public/upload/images/' . $workoutData['upload_url']) }}">
                                                 </video>
                                             @endif
 

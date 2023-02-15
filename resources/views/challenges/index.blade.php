@@ -33,7 +33,7 @@
     </style>
     <?php use Illuminate\Support\Str; ?>
 
-    <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
+    <section class="features" style="background-image:url({{ asset('public/assets/images/background/image-3.jpg') }});">
         <div class="container dashbord_container">
             <div class="row">
 
@@ -50,7 +50,7 @@
                             <div class="items">
                                 <?php $title = Str::replace(' ', '-', $challenge->title); ?>
                                 <a href="{{ url('/dashboard/challenges/' . $challenge->id . '/' . $title) }}">
-                                    <img src="{{ asset('upload/images/' . $challenge->image) }}" class="img-responsive"
+                                    <img src="{{ asset('public/upload/images/' . $challenge->image) }}" class="img-responsive"
                                         alt="">
                                     <div class="overLay">
                                         <h4 class="text-white">{{ $challenge->title }}</h4>
@@ -72,8 +72,8 @@
                             <div class="items">
                                 <?php $title = Str::replace(' ', '-', $challenge->title); ?>
                                 <a href="{{ url('/dashboard/challenges/' . $challenge->id . '/' . $title) }}">
-                                    <img src="{{ asset('upload/images/' . $challenge->image) }}" class="img-responsive"
-                                        alt="">
+                                    <img src="{{ asset('public/upload/images/' . $challenge->image) }}"
+                                        class="img-responsive" alt="">
                                     <div class="overLay">
                                         <h4 class="text-white">{{ $challenge->title }}</h4>
                                     </div>

@@ -106,7 +106,7 @@
         }
     </style>
     <?php use Illuminate\Support\Str; ?>
-    <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
+    <section class="features" style="background-image:url({{ asset('public/assets/images/background/image-3.jpg') }});">
         <div class="container dashbord_container">
             <div class="row">
 
@@ -150,7 +150,7 @@
 
                             <div class="item col-md-3 col-sm-4 col-12">
                                 <a href="{{ url('/dashboard/workout/' . $createdD['id'] . '/' . $title) }}">
-                                    <img src="{{ asset('upload/images/' . $createdD['upload_url']) }}"
+                                    <img src="{{ asset('public/upload/images/' . $createdD['upload_url']) }}"
                                         class="img-responsive" alt="">
                                     <div class="overLay">
                                         <h4 class="text-white">{{ $createdD['title'] }}</h4>
@@ -185,7 +185,7 @@
 
                                         <div class="items col-md-3 col-sm-4 col-12">
                                             <a href="{{ url('/dashboard/workout/' . $workPosts['id'] . '/' . $title) }}">
-                                                <img src="{{ asset('upload/images/' . $workPosts['upload_url']) }}"
+                                                <img src="{{ asset('public/upload/images/' . $workPosts['upload_url']) }}"
                                                     class="img-responsive" alt="">
                                                 <div class="overLay">
                                                     <h4 class="text-white">{{ $workPosts['title'] }}</h4>

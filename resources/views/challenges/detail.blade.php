@@ -59,13 +59,13 @@
             display: block;
         }
     </style>
-    <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
+    <section class="features" style="background-image:url({{ asset('public/assets/images/background/image-3.jpg') }});">
         <div class="container dashbord_container">
             <div class="row">
 
                 @if (!empty($challenges))
                     <div class="col-md-12 position-relative">
-                        <img src="{{ asset('upload/images/' . $challenges['image']) }}" class="img-responsive mx-auto"
+                        <img src="{{ asset('public/upload/images/' . $challenges['image']) }}" class="img-responsive mx-auto"
                             alt="">
                         <div class="overLay">
                             <h3>

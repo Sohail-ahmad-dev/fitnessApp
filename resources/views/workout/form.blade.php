@@ -135,7 +135,7 @@
         }
     </style>
 
-    <section class="features" style="background-image:url({{ asset('assets/images/background/image-3.jpg') }});">
+    <section class="features" style="background-image:url({{ asset('public/assets/images/background/image-3.jpg') }});">
         <div class="container dashbord_container">
 
 

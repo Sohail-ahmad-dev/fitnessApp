@@ -323,7 +323,7 @@
                                 <a href="{{ url('/dashboard/workout/' . $workoutPlan['id'] . '/' . $title) }}">
 
                                     <div class="row features"
-                                        @if ($workoutPlan['upload_type'] == 'image') style="background-image:url({{ asset('upload/images/' . $workoutPlan['upload_url']) }});" @endif>
+                                        @if ($workoutPlan['upload_type'] == 'image') style="background-image:url({{ asset('public/upload/images/' . $workoutPlan['upload_url']) }});" @endif>
 
 
                                         <h2 class="col-md-12">
@@ -416,7 +416,7 @@
                                     @foreach ($data['exercises'] as $exercise)
                                         @if ($exercise['upload_type'] == 'image')
                                             <div class="col-md-2 px-5">
-                                                <img src="{{ asset('upload/images/' . $exercise['upload_url']) }}"
+                                                <img src="{{ asset('public/upload/images/' . $exercise['upload_url']) }}"
                                                     class="img-responsive" alt="">
                                             </div>
                                         @endif
@@ -424,7 +424,8 @@
                                         @if ($exercise['upload_type'] == 'video')
                                             <div class="col-md-2 px-5">
                                                 <video controls>
-                                                    <source src="{{ asset('upload/images/' . $exercise['upload_url']) }}">
+                                                    <source
+                                                        src="{{ asset('public/upload/images/' . $exercise['upload_url']) }}">
                                                 </video>
                                             </div>
                                         @endif
@@ -547,7 +548,7 @@
                 .then(res => res.json())
                 .then(data => {
                     var appendActivity = document.querySelector(".activityWraper .panel-body a");
-                    var img_base = "{{ asset('upload/images/') }}"
+                    var img_base = "{{ asset('public/upload/images/') }}"
 
                     var count = data['exercises'].length;
                     var count2 = data['workoutPlan'] ? 2 : 0;
@@ -682,7 +683,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
-                        var img_base = "{{ asset('upload/images/') }}"
+                        var img_base = "{{ asset('public/upload/images/') }}"
 
                         var count = data.length;
                         var html = `<div class="col-md-12 my-20 border-1 p-15">

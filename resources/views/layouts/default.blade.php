@@ -20,9 +20,9 @@
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('/assets/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/revolution-slider.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/assets/css/revolution-slider.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/assets/css/style.css') }}" rel="stylesheet">
 
 
     <style>
@@ -432,16 +432,16 @@
     </div>
 
 
-    <script src="{{ asset('/assets/js/jquery.js') }}"></script>
-    <script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/revolution.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/bxslider.js') }}"></script>
-    <script src="{{ asset('/assets/js/jquery.appear.js') }}"></script>
-    <script src="{{ asset('/assets/js/wow.js') }}"></script>
-    <script src="{{ asset('/assets/js/knob.js') }}"></script>
-    <script src="{{ asset('/assets/js/validate.js') }}"></script>
-    <script src="{{ asset('/assets/js/script.js') }}"></script>
-    <script src="{{ asset('/assets/admin/js/admin_ajax.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/revolution.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bxslider.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.appear.js') }}"></script>
+    <script src="{{ asset('public/assets/js/wow.js') }}"></script>
+    <script src="{{ asset('public/assets/js/knob.js') }}"></script>
+    <script src="{{ asset('public/assets/js/validate.js') }}"></script>
+    <script src="{{ asset('public/assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/admin_ajax.js') }}"></script>
 
 
 </body>

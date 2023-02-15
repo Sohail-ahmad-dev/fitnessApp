@@ -15,13 +15,13 @@
         }
 
         /* h4,
-                                        button,
-                                        h5,
-                                        i,
-                                        p,
-                                        h3 {
-                                            color: #fff;
-                                        } */
+                                            button,
+                                            h5,
+                                            i,
+                                            p,
+                                            h3 {
+                                                color: #fff;
+                                            } */
 
         .my-15 {
             margin: 15px 0;
@@ -46,12 +46,13 @@
 
                 <div class="col-md-3">
                     @if ($data['upload_type'] == 'image')
-                        <img src="{{ asset('upload/images/' . $data['upload_url']) }}" alt="" class="img-responsive">
+                        <img src="{{ asset('public/upload/images/' . $data['upload_url']) }}" alt=""
+                            class="img-responsive">
                     @endif
 
                     @if ($data['upload_type'] == 'video')
                         <video controls>
-                            <source src="{{ asset('upload/images/' . $data['upload_url']) }}">
+                            <source src="{{ asset('public/upload/images/' . $data['upload_url']) }}">
                         </video>
                     @endif
                 </div>
