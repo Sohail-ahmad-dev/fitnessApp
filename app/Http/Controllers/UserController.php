@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Challenges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
-use App\Models\Workout_Plans;
 use Hash;
 use Session;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Equipment;
-use App\Models\Exercise;
-use App\Models\JoinChallenge;
 
 class UserController extends Controller
 {
@@ -82,13 +77,9 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        return view('home.index');
-    }
-    public function inbox()
-    {
         if(Auth::check())
         {
-            return view('inbox.index');
+            return view('auth.user_profile');
         }
 
         return redirect('login')->with('success', 'you are not allowed to access');
@@ -143,160 +134,6 @@ class UserController extends Controller
     
         return redirect('dashboard');
     }
-
-    // Workout Start
-    public function workout()
-    {
-        $workouts = [];
-        $createdData = [];
-
-        $categories = Workout_Plans::select('category')->whereHas('user', function ($query) {
-            $query->where('role', 1);
-        })->get();
-        
-        $createdData = Workout_Plans::where('user_id',Auth::id())->get()->toArray();
-
-        $categories = !empty($categories) ? $categories->toArray(): [];
-
-        $categories = array_unique(array_map(function ($i) { return $i['category']; }, $categories));
-        
-        if(count($categories) > 0){
-
-            foreach ($categories as $val) {
-
-                $data = Workout_Plans::where('category',$val)->whereHas('user', function ($query) {
-                    $query->where('role', 1);
-                })->get();
-                $data = !empty($data) ? $data->toArray(): [];
-                array_push($workouts,[
-                    'category' => $val,
-                    'data' => $data,
-                ]);
-                
-            }
-
-        }
-
-        // dd($data);
-        return view('workout.index',compact('workouts','createdData'));
-    }
-
-    public function workoutDetail($id,$name=null)
-    {
-        $data = Workout_Plans::find($id)->toArray();
-
-        $days = json_decode($data['days']);
-
-        $exercise_list = json_decode($data['exercise_list']);
-        // echo "<pre>";
-
-        $daysData = [];
-
-        foreach ($days as $ke => $val) {
-            
-            $exerciseData = [];
-            $index = 0;
-            $day = 1;
-            foreach ($exercise_list as $k => $vl) {
-                
-                if($vl->name == 'exercise_list-'.$val->value){
-                    $index = intval($val->value) - 1;
-                    $id = $vl->value;
-                    $day = $val->value;
-
-                    $exerciseData[] = Exercise::find($id)->toArray();
-                    
-                }
-
-
-            }
-            $daysData[$index] = [
-                'day' => $val->value,
-                'workout_list' => $exerciseData,
-            ];
-            // dd($exerciseData);
-            
-        }
-        
-        // dd($daysData);
-
-        return view('workout.workoutDetail', compact('data','daysData'));
-    }
-
-    public function workoutCreate()
-    {
-        $exerciseData = Exercise::all();
-        $equipment = Equipment::all();
-        return view('workout.form', compact('exerciseData','equipment'));
-    }
-
-    // Workout End
-
-
-    // challenges Start
-    public function challenges()
-    {
-        $joined = [];
-        $challenges = [];
-
-        $joinedData = JoinChallenge::where("user_id",Auth::id())->get()->toArray();
-
-        if(!empty($joinedData) && count($joinedData) > 0){
-
-            foreach ($joinedData as $k => $val) {
-
-                $challenges = Challenges::where('id','<>',$val['challenge_id'])->get();
-
-                $joined = Challenges::where('id',$val['challenge_id'])->get();
-
-            }
-
-        }else{
-            $challenges = Challenges::all();
-        }
-
-        // dd($joined,$challenges);
-        
-        return view('challenges.index',compact('challenges','joined'));
-    }
-    public function challengesDetail($id,$name=null)
-    {
-        $challenges = Challenges::find($id)->toArray();
-        $participants = JoinChallenge::where("challenge_id",$id)->count();
-
-        $leaveId = JoinChallenge::where([
-            "challenge_id" => $id,
-            "user_id" => Auth::id()
-        ])->first();
-            // dd($leaveId);
-
-        $join = JoinChallenge::where("challenge_id",$id)->where("user_id",Auth::id())->first();
-        if(!empty($join)){
-            $join = 'Joined';
-        }
-
-        return view('challenges.detail',compact('challenges','participants','join','leaveId'));
-    }
-
-    public function challengeJoin(Request $req)
-    {
-        // dd($req->all());
-        $data = JoinChallenge::insert([
-            'challenge_id' => $req->challenge_id,
-            'user_id' => $req->user_id,
-        ]);
-        return redirect()->back();
-    }
-
-    public function challengeLeave(Request $req)
-    {
-        $id = $req->id;
-        $exercise = JoinChallenge::findOrFail($id);
-        $exercise->delete();
-
-        return redirect()->route('user.challenges');
-    }
-    // challenges End
-
     
 }
+

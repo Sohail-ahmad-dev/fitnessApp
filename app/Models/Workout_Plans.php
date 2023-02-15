@@ -21,9 +21,4 @@ class Workout_Plans extends Model
         'description',
         'days'
     ];
-
-    public function user() {
-        return $this->belongsTo('App\Models\User', 'user_id');
-    }
-    
 }

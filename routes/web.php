@@ -7,9 +7,7 @@ use App\Http\Controllers\FitnessPostsController;
 use App\Http\Controllers\GuidedWorkoutsController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\WorkoutPlansController;
-use App\Http\Controllers\EquipmentController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ChallengesController;
 
 
 /*
@@ -51,63 +49,24 @@ Route::middleware(['admin'])->group(function () {
         Route::get('workoutPlans', 'index')->name('index');
         Route::get('workoutPlans/create', 'create')->name('create');
         Route::post('workoutPlans/insert', 'insert')->name('insert');
-        Route::get('workoutPlans/edit/{id}', 'edit')->name('plansEdit');
-        Route::post('workoutPlans/{id}', 'update')->name('plansUpdate');
-        Route::delete('workoutPlans/{id}', 'destroy')->name('plansDestroy');
     });
-
-    // Equipment routes here Start
-    Route::resource('equipment', EquipmentController::class);
-    // Equipment routes here End
-
-    // challenges routes here Start
-    Route::resource('challenges', ChallengesController::class);
-    // challenges routes here End
-
 });
 
 Route::get('blog/post', [FitnessPostsController::class, 'blogPost'])->name('blog.post');
 
-Route::middleware(['user'])->group(function () {
-
-    Route::controller(HomeController::class)->group(function () {
-        Route::get('/', 'index');
-    });
-
-    Route::controller(WorkoutPlansController::class)->name('workoutPlans.')->group(function () {
-        Route::post('workoutPlans/insert', 'insert')->name('insert');
-        Route::post('workoutPlans/{id}', 'update')->name('plansUpdate');
-        Route::delete('workoutPlans/{id}', 'destroy')->name('plansDestroy');
-    });
-
-    Route::controller(UserController::class)->group(function () {
-
-        Route::get('logout', 'logout')->name('logout');
-        Route::get('user/edit', 'edit')->name('user.edit');
-        Route::post('user/update', 'update')->name('user.update');
-
-        // Workout
-        Route::get('dashboard/workout', 'workout')->name('user.workout');
-        Route::get('dashboard/workout/create', 'workoutCreate')->name('user.workout.create');
-        Route::get('dashboard/workout/{id}/{name}', 'workoutDetail')->name('user.workoutDetail');
-        // Challenges
-        Route::get('dashboard/challenges', 'challenges')->name('user.challenges');
-        Route::get('dashboard/challenges/{id}/{name}', 'challengesDetail')->name('challenges.detail');
-        Route::post('dashboard/challenges/join', 'challengeJoin')->name('challenges.join');
-        Route::post('dashboard/challenges/leave', 'challengeLeave')->name('challenges.leave');
-
-    });
-
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index');
 });
 
-
 Route::controller(UserController::class)->group(function () {
-
     Route::get('register', 'register')->name('register');
     Route::post('register/create', 'create')->name('register.create');
     Route::get('login', 'login')->name('login');
     Route::post('validate_login', 'validate_login')->name('sample.validate_login');
     Route::get('dashboard', 'dashboard')->name('dashboard');
-    Route::get('dashboard/inbox', 'inbox')->name('dashboard.inbox');
+    Route::get('logout', 'logout')->name('logout');
+    Route::get('user/edit', 'edit')->name('user.edit');
+    Route::post('user/update', 'update')->name('user.update');
+ 
 
 });
