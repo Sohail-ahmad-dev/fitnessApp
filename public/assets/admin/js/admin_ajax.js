@@ -1,3 +1,5 @@
+
+var base_url = $('meta[name="base_url"]').attr('content') || '';
 function stateUpdateUser(id){
     var status = document.getElementById('userStatus-'+id).value;
     $.ajax({
@@ -237,6 +239,133 @@ function deleteExerciseSeconds(id) {
     });
 }
 
+function deleteEquipment(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to Delete this Equipment?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url:  base_url+"/equipment/"+id,
+                type: 'DELETE',
+                data: {
+                    _token: csrf,
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        Swal.fire(
+                            'Deleted!',
+                            'Equipment has been deleted.',
+                            'success'
+                        ).then((resultData) => {
+                            if (resultData.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                        // $('#user-'+id).remove();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred. Please try again.',
+                            'error'
+                        )
+                    }
+                }
+            });
+        }
+    });
+}
+
+
+function deleteWorkoutPlans(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to Delete this Data?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url:  base_url+"/workoutPlans/"+id,
+                type: 'DELETE',
+                data: {
+                    _token: csrf,
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        Swal.fire(
+                            'Deleted!',
+                            'User has been deleted.',
+                            'success'
+                        ).then((resultData) => {
+                            if (resultData.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                        $('#user-'+id).remove();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred. Please try again.',
+                            'error'
+                        )
+                    }
+                }
+            });
+        }
+    });
+}
+
+function deleteChallenges(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to Delete this Data?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url:  base_url+"/challenges/"+id,
+                type: 'DELETE',
+                data: {
+                    _token: csrf,
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        Swal.fire(
+                            'Deleted!',
+                            'User has been deleted.',
+                            'success'
+                        ).then((resultData) => {
+                            if (resultData.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                        $('#user-'+id).remove();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred. Please try again.',
+                            'error'
+                        )
+                    }
+                }
+            });
+        }
+    });
+}
+
 function exerciseIdAppend(id){
     $("input[name='excercise_id']").val(id);
 }
@@ -277,14 +406,16 @@ function secondsUpdate(){
 
 var countDays = 2;
 function daysCount(multiDrop){
+    console.log($(".workoutPlan_box").children(),$(".workoutPlan_box").children().length);
+    countDays = $(".workoutPlan_box").children().length + 1;
     var dayval = countDays ++;
     var daysData = '';
-    var daysData = `<div class="row"><label class="col-form-label col-md-2">Day ${dayval}</label><div class="col-md-10 inputBox mb-2"><input type="text" name="days-${dayval}" class="form-control" value="${dayval}"><label class="col-form-label col-md-6">Select Excercise List</label><div class="col-md-12"><select class="workoutPlans_dropdown-${dayval} form-control" name="exercise_list-${dayval}">`;
+    var daysData = `<div class="row px-15 pt-20"><label class="col-form-label col-md-2">Day ${dayval}</label><div class="col-md-10 inputBox mb-2"><input type="text" name="days-${dayval}" class="form-control" value="${dayval}"><label class="col-form-label col-md-6 px-0">Select Excercise List</label><div class="col-md-12 px-0"><select class="workoutPlans_dropdown-${dayval} form-control" name="exercise_list-${dayval}">`;
     for (let i = 0; i < multiDrop.length; i++) {
         daysData += `<option value=${multiDrop[i]['id']}>${multiDrop[i]['title']}</option>`
     }
     daysData += `</select></div></div></div>`
-    console.log(daysData);
+    // console.log(daysData);
     $(".workoutPlan_box").append(daysData);
     $(`.workoutPlans_dropdown-${dayval}`).CreateMultiCheckBox({ defaultText : 'Select Below' });
   return false;
@@ -293,7 +424,11 @@ function daysCount(multiDrop){
 
 //workout select dropdown
 $(document).ready(function () {
-    $(".workoutPlans_dropdown").CreateMultiCheckBox({ defaultText : 'Select Below' });
+    // console.log($(".equipments_dropdown"));
+    if($(".equipments_dropdown").length)
+        $(".equipments_dropdown").CreateMultiCheckBox({ defaultText : 'Select Below' });
+    if($(".workoutPlans_dropdown").length)
+        $(".workoutPlans_dropdown").CreateMultiCheckBox({ defaultText : 'Select Below' });
 });
 $(document).ready(function () {
     $(document).on("click", ".MultiCheckBox", function () {
@@ -366,11 +501,12 @@ jQuery.fn.extend({
 
         this.find("option").each(function () {
             var val = $(this).attr("value");
+            var select = $(this).attr("selected");
 
             if (val == undefined)
                 val = '';
-
-            multiCheckBoxDetailBody.append("<div class='cont'><div><input type='checkbox' class='mulinput' value='" + val + "' /></div><div>" + $(this).text() + "</div></div>");
+                
+            multiCheckBoxDetailBody.append(`<div class='cont'><div><input type='checkbox' class='mulinput'  value=${val} ${select === 'selected' ? 'checked' :''} /></div><div>${$(this).text()}</div></div>`);
         });
 
         multiCheckBoxDetailBody.css("max-height", (parseInt($(".MultiCheckBoxDetail").css("max-height")) - 28) + "px");
@@ -387,34 +523,184 @@ jQuery.fn.extend({
 });
 
 //addWorkoutPlans
-function addWorkoutPlans(){
-    var workoutdata = $("#addWorkoutPlans").serializeArray();
+function addWorkoutPlans(action,id){
+    var formData = new FormData();
+    action === 'add' ? base_url+"/workoutPlans/insert": base_url+"/workoutPlans/"+id
+    var workoutdata = action === 'add' ? $("#addWorkoutPlans").serializeArray(): $("#editWorkoutPlans").serializeArray();
+
+    var fileInput = document.querySelector('input[name="upload_url"]');
+    formData.append('upload_url', fileInput.files[0]);
+
+    console.log(fileInput);
+    
     var days = []; 
-    var exercise_list = []; 
+    var exercise_list = [];
+    var equipment = '';
 
     var orignalData = workoutdata.filter(elm =>{
         if(elm.name.includes('exercise_list'))
             exercise_list.push(elm)
         if(elm.name.includes('days'))
             days.push(elm)
-        if(elm.name.includes('exercise_list') || elm.name.includes('days')){
+        if(elm.name.includes('equipment'))
+            equipment += (elm.value+',')
+        if(elm.name.includes('exercise_list') || elm.name.includes('days') || elm.name.includes('equipment')){
         }else{
             return elm
         }
-    })
+    });
+    
+    equipment = equipment.slice(0, -1);
     orignalData.push({name:'days',value:JSON.stringify(days)});
     orignalData.push({name:'exercise_list',value:JSON.stringify(exercise_list)});
-    console.log(base_url+"/workoutPlans/insert");
+    orignalData.push({name:'equipment',value:equipment});
+    orignalData.forEach(el => {
+        formData.append(el.name, el.value);
+    });
+    
+    var url = action === 'add' ? base_url+"/workoutPlans/insert": base_url+"/workoutPlans/"+id
+    
+    var _token = $("#editWorkoutPlans input[name='_token']").val() || $("#addWorkoutPlans input[name='_token']").val()
+
+
     $.ajax({
-        url: base_url+"/workoutPlans/insert",
-        type: 'POST',
-        data: orignalData,
+        headers: {
+            'X-CSRF-TOKEN': _token,
+        },
+        url: url,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData:false,
+        cache: false,
         success: function(result) {
-            console.log(result);
-            // location.reload(true);
+            const data = parseInt(result);
+            if(data){
+                var redirect = action === 'add' ? $("#addWorkoutPlans input[name='roleUser']").val(): $("#editWorkoutPlans input[name='roleUser']").val()
+                if(redirect === '1'){
+                    window.location.href = '/workoutPlans'
+                }else{
+                    window.location.href = '/dashboard/workout'
+                }
+            }
+        }
+    });
+
+    return false;
+    // console.log(orignalData);
+}
+
+function editDaysExercise(data,exerciseData){
+    // console.log(data,exerciseData);
+
+    var html = '';
+    
+    data.forEach(elm => {
+        html += `<div class="row"><label class="col-form-label col-md-2">Day ${elm.day}</label>
+            <div class="col-md-10 inputBox mb-2">
+                <input type="text" name="days-${elm.day}" class="form-control" value="${elm.day}">
+                <label class="col-form-label col-md-6">Select Excercise List</label>
+                <div class="col-md-12">
+                    <select class="multi workoutPlans_dropdown-${elm.day}" class="form-control" name="exercise_list-${elm.day}">`;
+
+        exerciseData.forEach(el => {
+            html += `<option value="${el.id}">${el.title}</option>`;
+        });
+        // elm.exercise_list.forEach(el => {
+        //     html += `<option value="${el.id}" selected>${el.title}</option>`;
+        // });
+        html += `</select>
+        </div>
+        </div></div>`;
+    });
+
+    $(".workoutPlan_box").html(html);
+
+    data.forEach(function(el){
+        el.exercise_list.forEach(e => {
+            $(`.workoutPlans_dropdown-${el.day}`).each(function(){
+                $(this).children().each(function(i,elm){
+                    if(parseInt(elm.value) === e.id){
+                        elm.setAttribute("selected",true)
+                    }
+                })
+            })
+        })
+    });
+
+    
+    $(`.multi`).each(function(){
+        $(this).CreateMultiCheckBox({ defaultText : 'Select Below' })
+    })
+    
+    
+}
+
+function equipmentDrop (equipment) {
+    console.log(equipment);
+
+    for (let i = 0; i < equipment.length; i++) {
+        $(`.equipments_dropdown1`).each(function(){
+            $(this).children().each(function(i,elm){
+                console.log(elm.innerText,equipment[i]);
+                if(elm.innerText === equipment[i]){
+                    elm.setAttribute("selected",true)
+                }
+            })
+        })
+    }
+    // equipments_dropdown
+    $('.equipments_dropdown1').CreateMultiCheckBox({ defaultText : 'Select Below' })
+}
+
+function addCalendarBtn(){
+    var elmLength = $(".dashbord_container input[name='calander']").length;
+    var lopLeng = 0;
+
+    var exerArr_Id = [];
+    
+    $(".dashbord_container input[name='calander']").each(function(i){
+        if(!$(".calendarBtn").children('.btn').length){
+            $(".dashbord_container .calendarBtn").append(`<button type="submit" class="btn btn-primary">Add to today</button>`)
+        }
+        if(!$(this).is(':checked') && i === 0){
+            console.log($(".calendarBtn").children('.btn').length);
+            if($(".calendarBtn").children('.btn').length){
+                $(".calendarBtn").html('')
+            }
+        }
+
+        if(!$(this).is(':checked')){
+            lopLeng++
+        }else{
+            exerArr_Id.push($(this).attr("id"))
+        }
+        
+    });
+
+    if(elmLength === lopLeng){
+        $(".calendarBtn").html('')
+    }else{
+        $('input[name="exercise_id"]').val(exerArr_Id)
+    }
+
+    
+}
+
+function addToCalendar() {
+    var data = $("#addToCalendar").serializeArray();
+
+    $.ajax({
+        url: base_url+'/dashboard/exercise/today',
+        type: 'POST',
+        data: data,
+        success: function(result) {
+            if(result === '1'){
+                window.location.href = base_url+'/dashboard/today/activity'
+            }
         }
     });
     
-    console.log(orignalData);
+    
     return false;
 }

@@ -21,6 +21,11 @@
         <div class="col-sm-3">
             <ul class="nav nav-pills nav-stacked nav-email shadow mb-20">
                 <li class="active">
+                    <a href="">
+                        <i class="fa fa-home"></i> Home
+                    </a>
+                </li>
+                <li>
                     <a href="#mail-inbox.html">
                         <i class="fa fa-inbox"></i> Inbox  <span class="label pull-right">7</span>
                     </a>

@@ -84,8 +84,8 @@
                                                 {{!empty($item->goal)? $item->goal : "N/A"}}
                                             </td>
                                            <td>
-                                            <button type="button" class="btn btn-danger" onclick="deleteWorkoutPlan({{ $item->id }})">Delete</button>
-                                            <a href="{{ url('WorkoutPlan/edit/'.$item->id) }}" class="btn btn-primary">Update</a>
+                                            <button type="button" class="btn btn-danger" onclick="deleteWorkoutPlans({{ $item->id }})">Delete</button>
+                                            <a href="{{ url('workoutPlans/edit/'.$item->id) }}" class="btn btn-primary">Update</a>
                                            </td>
                                         </tr>
                                         @endforeach

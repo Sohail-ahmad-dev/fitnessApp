@@ -14,31 +14,31 @@
         <link rel="shortcut icon" type="image/x-icon" href="/assets/admin/img/favicon.png">
 		
 		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="/fitnessApp/assets/admin/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/admin/css/bootstrap.min.css">
 		
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="/fitnessApp/assets/admin/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/admin/css/font-awesome.min.css">
 
         <!-- Feathericon CSS -->
-		<link rel="stylesheet" href="/fitnessApp/assets/admin/css/feather.css">
+		<link rel="stylesheet" href="/assets/admin/css/feather.css">
 
         <!--font style-->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 		
 		<!-- Lineawesome CSS -->
-        <link rel="stylesheet" href="/fitnessApp/assets/admin/css/line-awesome.min.css">
+        <link rel="stylesheet" href="/assets/admin/css/line-awesome.min.css">
 		
 		<!-- Chart CSS -->
-		<link rel="stylesheet" href="/fitnessApp/assets/admin/plugins/morris/morris.css">
+		<link rel="stylesheet" href="/assets/admin/plugins/morris/morris.css">
 
 		<!-- Theme CSS -->
-        <link rel="stylesheet" href="/fitnessApp/assets/admin/css/theme-settings.css">
+        <link rel="stylesheet" href="/assets/admin/css/theme-settings.css">
 
         <!-- Sweet Alert Css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.css">
 
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="/fitnessApp/assets/admin/css/style.css" class="themecls">
+        <link rel="stylesheet" href="/assets/admin/css/style.css" class="themecls">
         <script>
             window.base_url = "{{url('')}}" || '';
             window.csrf = "{{csrf_token()}}" || '';
