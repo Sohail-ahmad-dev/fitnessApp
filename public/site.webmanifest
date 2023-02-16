@@ -1,6 +1,7 @@
 {
     "name": "Fitness App",
     "short_name": "Fitness",
+    "start_url": "/dashboard",
     "icons": [{
             "src": "/favicon_io/myLogo-192x192.png",
             "sizes": "192x192",

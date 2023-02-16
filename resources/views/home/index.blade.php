@@ -1,6 +1,6 @@
 @extends('layouts/default')
 
-@section('title', 'Sign Up')
+@section('title', 'Dashboard')
 <!-- Main Slider -->
 @section('content')
     <!--app cards-->
