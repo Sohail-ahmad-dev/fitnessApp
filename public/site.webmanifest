@@ -2,12 +2,12 @@
     "name": "Fitness App",
     "short_name": "Fitness",
     "icons": [{
-            "src": "/myLogo-192x192.png",
+            "src": "/favicon_io/myLogo-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/myLogo-512x512.png",
+            "src": "/favicon_io/myLogo-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
