@@ -82,6 +82,8 @@ Route::middleware(['user'])->group(function () {
 
     Route::controller(UserController::class)->group(function () {
 
+        Route::get('dashboard', 'dashboard')->name('dashboard');
+
         Route::get('logout', 'logout')->name('logout');
         Route::get('user/edit', 'edit')->name('user.edit');
         Route::post('user/update', 'update')->name('user.update');
@@ -127,7 +129,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('register/create', 'create')->name('register.create');
     Route::get('login', 'login')->name('login');
     Route::post('validate_login', 'validate_login')->name('sample.validate_login');
-    Route::get('dashboard', 'dashboard')->name('dashboard');
+    // Route::get('dashboard', 'dashboard')->name('dashboard');
     Route::get('dashboard/inbox', 'inbox')->name('dashboard.inbox');
 
 });

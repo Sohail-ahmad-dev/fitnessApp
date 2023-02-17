@@ -1,16 +1,19 @@
 {
     "name": "Fitness App",
     "short_name": "Fitness",
-    "start_url": "/dashboard",
-    "icons": [{
-            "src": "/favicon_io/myLogo-192x192.png",
+    "start_url": "https://oasiss-solutions.com/fitnessApp/dashboard",
+    "icons": [
+        {
+            "src": "https://oasiss-solutions.com/fitnessApp/public/favicon_io/myLogo-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "/favicon_io/myLogo-512x512.png",
+            "src": "https://oasiss-solutions.com/fitnessApp/public/favicon_io/myLogo-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ],
     "theme_color": "#ffffff",

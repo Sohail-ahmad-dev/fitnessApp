@@ -15,7 +15,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') - Fitness App</title>
     <meta name="base_url" content="{{ url('') }}">
-
+    <meta name="theme-color" content="#fff">
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -302,108 +302,102 @@
             grid-template-columns: repeat(1, minmax(0, 1fr))
         }
 
-        @media (min-width:640px) {
-            .sm\:rounded-lg {
-                border-radius: .5rem
-            }
-
-            .sm\:block {
-                display: block
-            }
-
-            .sm\:items-center {
-                align-items: center
-            }
-
-            .sm\:justify-start {
-                justify-content: flex-start
-            }
-
-            .sm\:justify-between {
-                justify-content: space-between
-            }
-
-            .sm\:h-20 {
-                height: 5rem
-            }
-
-            .sm\:ml-0 {
-                margin-left: 0
-            }
-
-            .sm\:px-6 {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem
-            }
-
-            .sm\:pt-0 {
-                padding-top: 0
-            }
-
-            .sm\:text-left {
-                text-align: left
-            }
-
-            .sm\:text-right {
-                text-align: right
-            }
+        <blade media|%20(min-width%3A640px)%20%7B%0D>.sm\:rounded-lg {
+            border-radius: .5rem
         }
 
-        @media (min-width:768px) {
-            .md\:border-t-0 {
-                border-top-width: 0
-            }
-
-            .md\:border-l {
-                border-left-width: 1px
-            }
-
-            .md\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
+        .sm\:block {
+            display: block
         }
 
-        @media (min-width:1024px) {
-            .lg\:px-8 {
-                padding-left: 2rem;
-                padding-right: 2rem
-            }
+        .sm\:items-center {
+            align-items: center
         }
 
-        @media (prefers-color-scheme:dark) {
-            .dark\:bg-gray-800 {
-                --tw-bg-opacity: 1;
-                background-color: rgb(31 41 55 / var(--tw-bg-opacity))
-            }
-
-            .dark\:bg-gray-900 {
-                --tw-bg-opacity: 1;
-                background-color: rgb(17 24 39 / var(--tw-bg-opacity))
-            }
-
-            .dark\:border-gray-700 {
-                --tw-border-opacity: 1;
-                border-color: rgb(55 65 81 / var(--tw-border-opacity))
-            }
-
-            .dark\:text-white {
-                --tw-text-opacity: 1;
-                color: rgb(255 255 255 / var(--tw-text-opacity))
-            }
-
-            .dark\:text-gray-400 {
-                --tw-text-opacity: 1;
-                color: rgb(156 163 175 / var(--tw-text-opacity))
-            }
-
-            .dark\:text-gray-500 {
-                --tw-text-opacity: 1;
-                color: rgb(107 114 128 / var(--tw-text-opacity))
-            }
+        .sm\:justify-start {
+            justify-content: flex-start
         }
-    </style>
 
-    <style>
+        .sm\:justify-between {
+            justify-content: space-between
+        }
+
+        .sm\:h-20 {
+            height: 5rem
+        }
+
+        .sm\:ml-0 {
+            margin-left: 0
+        }
+
+        .sm\:px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem
+        }
+
+        .sm\:pt-0 {
+            padding-top: 0
+        }
+
+        .sm\:text-left {
+            text-align: left
+        }
+
+        .sm\:text-right {
+            text-align: right
+        }
+        }
+
+        <blade media|%20(min-width%3A768px)%20%7B%0D>.md\:border-t-0 {
+            border-top-width: 0
+        }
+
+        .md\:border-l {
+            border-left-width: 1px
+        }
+
+        .md\:grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+        }
+        }
+
+        <blade media|%20(min-width%3A1024px)%20%7B%0D>.lg\:px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem
+        }
+        }
+
+        <blade media|%20(prefers-color-scheme%3Adark)%20%7B%0D>.dark\:bg-gray-800 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(31 41 55 / var(--tw-bg-opacity))
+        }
+
+        .dark\:bg-gray-900 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity))
+        }
+
+        .dark\:border-gray-700 {
+            --tw-border-opacity: 1;
+            border-color: rgb(55 65 81 / var(--tw-border-opacity))
+        }
+
+        .dark\:text-white {
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity))
+        }
+
+        .dark\:text-gray-400 {
+            --tw-text-opacity: 1;
+            color: rgb(156 163 175 / var(--tw-text-opacity))
+        }
+
+        .dark\:text-gray-500 {
+            --tw-text-opacity: 1;
+            color: rgb(107 114 128 / var(--tw-text-opacity))
+        }
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
         }
@@ -418,7 +412,8 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('{{ asset('public/assets/js/sw.js') }}');
+                navigator.serviceWorker.register(
+                    '{{ asset('public/assets/js/sw.js') }}');
             });
         }
     </script>
@@ -456,6 +451,7 @@
     <script src="{{ asset('public/assets/js/validate.js') }}"></script>
     <script src="{{ asset('public/assets/js/script.js') }}"></script>
     <script src="{{ asset('assets/admin/js/admin_ajax.js') }}"></script>
+
 
 
     <script>
@@ -497,6 +493,7 @@
             installButton.style.display = 'none';
         });
     </script>
+
 
 
 </body>
